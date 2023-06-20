@@ -8,9 +8,15 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { FeedPageComponent } from './feedpage/feedpage.component';
 import { NewaccountpageComponent } from './newaccountpage/newaccountpage.component';
 import { PasswordComponent } from './password/password.component';
-import { FormsModule } from '@angular/forms';
+import { CheckboxControlValueAccessor, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CreatePasswordComponent } from './create-password/create-password.component';
+import {MatInputModule} from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule, matFormFieldAnimations} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -22,12 +28,18 @@ import { CreatePasswordComponent } from './create-password/create-password.compo
     FeedPageComponent,
     NewaccountpageComponent,
     PasswordComponent,
-    CreatePasswordComponent
+    CreatePasswordComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

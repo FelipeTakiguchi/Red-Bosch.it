@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --vermilion: #B10F2E;
+    --verdigris: #17BEBB;
+    --raisin-black: #2e282a;
+    --buff: #EDB88B;
+    --misty-rose: #FAD8D6;
+    --white: #FDFFFF;
+    --rosewood: #570000;
+    --burnt-sienna: #DE7C5A;
+    --timber-wolf: #D7CDCC;
+}
+
+nav{
+    font-size: 25px;
+}
+
+main, footer{    
+    background-color: var(--timber-wolf);
+}
+
+footer{
+    min-height: 5vh;
+}
+
+footer > *{
+    font-weight: 900;
+    font-size: 20px;
+    margin-left: 84vw !important;
+}
+
+body {
+    margin: 0%;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

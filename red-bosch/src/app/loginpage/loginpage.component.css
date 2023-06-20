@@ -1,0 +1,15 @@
+.card{
+    margin-top: 3vh;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    border: 3px;
+    box-shadow: var(--raisin-black) 1vh 0.8vh 1vh 0.5vh;
+    border-radius: 8px;
+    align-items: center;
+    background-color: var(--white);
+}
+
+mat-form-field{
+    width: 500px !important;
+}

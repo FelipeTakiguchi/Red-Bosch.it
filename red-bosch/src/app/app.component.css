@@ -1,0 +1,27 @@
+header{
+    margin: 0px;
+    padding: 5px;
+    background-color: var(--vermilion);
+}
+
+header{
+    min-height: 10vh;
+}
+
+nav{
+    min-height: 5vh;
+}
+
+main{
+    min-height: 80vh;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+footer p{
+    position: relative;
+    right: 0px;
+}

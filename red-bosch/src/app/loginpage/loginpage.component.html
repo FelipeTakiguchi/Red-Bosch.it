@@ -1,19 +1,23 @@
-<h1>
-    Login
-</h1>
-<p>
-    <label>Email/Username</label>
-    <br>
-    <input>
-</p>
-<app-password [seePassword]="false" [breakLineOnInput]="true" />
-<p>
-    <button>Logar</button>
-</p>
-<p>
-    Não possui conta? <a routerLink="newaccount">Crie uma agora mesmo!</a>
-</p>
-<p>
-    Esqueceu sua senha? <a href="/recover">Recupere agora!</a>
-</p>
-<router-outlet></router-outlet>
+<div class="card">
+    <h1>
+        Login
+    </h1>
+    <p>
+        <br>
+        <mat-form-field>
+            <mat-label>Email/Username</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </p>
+    <app-password [seePassword]="false" [breakLineOnInput]="true" />
+    <router-outlet></router-outlet>
+    <p> 
+        <button mat-raised-button color="primary">Logar</button>
+    </p>
+    <p>
+        Não possui conta? <a routerLink="newaccount">Crie uma agora mesmo!</a>
+    </p>
+    <!-- <p>
+        Esqueceu sua senha? <a href="/recover">Recupere agora!</a>
+    </p> -->
+</div>
