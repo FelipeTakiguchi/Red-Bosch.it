@@ -1,27 +1,29 @@
-header{
+header {
     margin: 0px;
     padding: 5px;
-    background-color: var(--vermilion);
 }
 
-header{
+header {
     min-height: 10vh;
 }
 
-nav{
+nav {
     min-height: 5vh;
+    box-shadow: gray 1px 2px 22px 9px;
 }
 
-main{
+main {
     min-height: 80vh;
+    background: rgb(248, 248, 248);
+    background: linear-gradient(126deg, rgba(248, 248, 248, 1) 0%, rgba(124, 87, 87, 1) 48%, rgba(0, 17, 19, 1) 100%, rgba(9, 9, 121, 1) 100%, rgba(0, 212, 255, 1) 100%);
 }
 
-main{
+main {
     display: flex;
     justify-content: center;
 }
 
-footer p{
+footer p {
     position: relative;
     right: 0px;
 }

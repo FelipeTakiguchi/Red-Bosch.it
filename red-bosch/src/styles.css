@@ -15,7 +15,7 @@ nav{
     font-size: 25px;
 }
 
-main, footer{    
+header, footer{    
     background-color: var(--timber-wolf);
 }
 

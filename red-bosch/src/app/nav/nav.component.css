@@ -3,8 +3,10 @@ ul{
     justify-content:space-between;
     list-style-type: none;
     padding: 0px;
-    margin-left: 3vh;
-    margin-right: 3vh;
+    margin: 0px;
+    padding-top: 1.5vh;
+    padding-left: 3vh;
+    padding-right: 3vh;
 }
 
 a{
