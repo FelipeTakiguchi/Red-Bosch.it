@@ -1,6 +1,10 @@
 .card{
     margin-top: 3vh;
-    padding: 80px;
+    margin-bottom: 3vh;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     border: 3px;
@@ -11,5 +15,5 @@
 }
 
 mat-form-field{
-    width: 500px !important;
+    width: 400px !important;
 }
