@@ -43,16 +43,6 @@ button {
 }
 
 button:hover {
-    color: var(--burnt-sienna);
-    background-color: whitesmoke;
-}
-
-.main{
-    display: flex;
-    flex-direction: row;
-}
-
-.cards{
-    display: flex;
-    flex-direction: column;
+    background-color: orange;
+    cursor: pointer;
 }

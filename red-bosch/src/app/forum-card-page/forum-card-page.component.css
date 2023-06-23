@@ -1,0 +1,27 @@
+.forum-card {
+    width: 800px;
+    min-height: 100px;
+    background-color: var(--white);
+    margin: 30px;
+    padding: 10px;
+}
+
+.content {
+    display: flex;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    margin: 7px 20px;
+    width: 100%;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+}
+
+.header p{
+    margin-left: 10px;
+}

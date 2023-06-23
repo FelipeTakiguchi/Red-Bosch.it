@@ -5,6 +5,7 @@
     --raisin-black: #2e282a;
     --buff: #EDB88B;
     --misty-rose: #FAD8D6;
+    --misty-rose-100: #e7bebb;
     --white: #FDFFFF;
     --rosewood: #570000;
     --burnt-sienna: #DE7C5A;
@@ -12,11 +13,12 @@
 }
 
 nav{
-    font-size: 25px;
+    font-size: 20px;
+    margin: 0px 0px 10px;
 }
 
 header, footer{    
-    background-color: var(--misty-rose);
+    background-color: var(--white);
 }
 
 footer{

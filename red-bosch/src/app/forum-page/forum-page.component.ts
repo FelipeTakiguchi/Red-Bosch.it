@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './forum-page.component.html',
   styleUrls: ['./forum-page.component.css']
 })
-export class ForumPageComponent {
 
+export class ForumPageComponent {
+  
 }

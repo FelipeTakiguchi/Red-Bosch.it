@@ -20,6 +20,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule, matDatepickerAnimations} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
+import { ForumCardComponent } from './forum-card/forum-card.component';
+import { ForumCardPageComponent } from './forum-card-page/forum-card-page.component';
+import { ProfileCardComponent } from './profile-card/profile-card.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     NewaccountpageComponent,
     PasswordComponent,
     CreatePasswordComponent,
+    ForumCardComponent,
+    ForumCardPageComponent,
+    ProfileCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
