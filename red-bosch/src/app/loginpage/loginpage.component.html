@@ -1,7 +1,8 @@
 <div class="card">
-    <h1>
-        Login
+    <h1 *ngIf="isLogin">
+        Log In
     </h1>
+    <h1 *ngIf="!isLogin">Sign in</h1>
     <p>
         <br>
         <mat-form-field>
@@ -12,10 +13,13 @@
     <app-password [seePassword]="false" [breakLineOnInput]="true" />
     <router-outlet></router-outlet>
     <p> 
-        <button mat-raised-button color="primary">Login</button>
+        <button mat-raised-button color="primary"><p *ngIf="isLogin">Log in</p><p *ngIf="!isLogin">Create your account</p></button>
     </p>
-    <p>
-        Don't have an account? <a routerLink="newaccount">Create here!</a>
+    <p *ngIf="isLogin">
+        Don't have an account? <a routerLink="newaccount" (click)="changeTemplate()">Create here!</a>
+    </p>
+    <p *ngIf="!isLogin">
+        Already have an account? <a routerLink="../login" (click)="changeTemplate()">Log in!</a>
     </p>
     <!-- <p>
         Esqueceu sua senha? <a href="/recover">Recupere agora!</a>

@@ -23,6 +23,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ForumCardComponent } from './forum-card/forum-card.component';
 import { ForumCardPageComponent } from './forum-card-page/forum-card-page.component';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
+import { CreateForumPageComponent } from './create-forum-page/create-forum-page.component';
+import {MatIconModule} from '@angular/material/icon';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
     ForumCardComponent,
     ForumCardPageComponent,
     ProfileCardComponent,
+    CreateForumPageComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,7 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

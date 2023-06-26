@@ -1,0 +1,19 @@
+.card{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 3px;
+    border-radius: 8px;
+    align-items: center;
+    background-color: var(--white);
+    width: 500px;
+}
+
+.card mat-form-field{
+    width: 400px;
+}
