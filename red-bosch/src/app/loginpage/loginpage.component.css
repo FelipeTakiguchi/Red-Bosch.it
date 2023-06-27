@@ -13,10 +13,6 @@
     background-color: var(--white);
 }
 
-mat-form-field{
-    width: 400px !important;
-}
-
 button{
     padding-top: 10px;
 }

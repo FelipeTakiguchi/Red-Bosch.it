@@ -1,4 +1,4 @@
-.card-profile{
+.card-profile {
     background-color: var(--white);
     padding: 10px 20px 1px;
     border-radius: 8px;
@@ -6,27 +6,27 @@
     max-width: 300px;
 }
 
-.card-profile *{
+.card-profile * {
     margin: 6px;
 }
 
-#profile-icon{
+#profile-icon {
     width: 200px;
     height: 200px;
     border-radius: 100%;
 }
 
-*{
+* {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.paragraph{
+.paragraph {
     font-size: 20px;
 }
 
-#edit-profile{
+#edit-profile {
     width: 80px;
     font-size: 26px;
     color: var(--burnt-sienna);
@@ -39,9 +39,4 @@
 #edit-profile:hover {
     cursor: pointer;
     background-color: rgb(206, 190, 190);
-}
-
-.example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
 }

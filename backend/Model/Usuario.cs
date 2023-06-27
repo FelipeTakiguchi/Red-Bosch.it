@@ -11,7 +11,9 @@ public partial class Usuario
 
     public string Nome { get; set; } = null!;
 
-    public string Senha { get; set; } = null!;
+    public byte[] Senha { get; set; } = null!;
+
+    public string Salt { get; set; } = null!;
 
     public DateTime DataNascimento { get; set; }
 
@@ -28,4 +30,6 @@ public partial class Usuario
     public virtual ICollection<UsuarioCargo> UsuarioCargos { get; set; } = new List<UsuarioCargo>();
 
     public virtual ICollection<UsuarioForum> UsuarioForums { get; set; } = new List<UsuarioForum>();
+
+    public virtual ICollection<Vote> Votes { get; set; } = new List<Vote>();
 }

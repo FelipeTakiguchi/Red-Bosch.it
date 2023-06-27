@@ -1,9 +1,9 @@
-<div class="card-profile">
+<div class="edit-profile">
     <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput value="Felipe N">
     </mat-form-field>
-    <img id="profile-icon" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <app-custom-profile-img [url]="'https://material.angular.io/assets/img/examples/shiba2.jpg'" [inputStyle]="'width: 300px; height: 300px'"></app-custom-profile-img>
     <div class="content">
         <mat-form-field>
             <mat-label>Description</mat-label>

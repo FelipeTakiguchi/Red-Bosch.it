@@ -26,6 +26,8 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { CreateForumPageComponent } from './create-forum-page/create-forum-page.component';
 import {MatIconModule} from '@angular/material/icon';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CustomInputComponent } from './custom-input/custom-input.component';
+import { CustomProfileImgComponent } from './custom-profile-img/custom-profile-img.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     ProfileCardComponent,
     CreateForumPageComponent,
     EditProfileComponent,
+    CustomInputComponent,
+    CustomProfileImgComponent,
   ],
   imports: [
     BrowserModule,

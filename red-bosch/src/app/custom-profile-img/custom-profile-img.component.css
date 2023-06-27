@@ -1,0 +1,16 @@
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.imagem {
+    width: 150px;
+    height: 150px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 100%;
+    cursor: pointer;
+    position: relative;
+    top: 50%;
+    z-index: 3;
+}

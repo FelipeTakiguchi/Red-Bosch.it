@@ -1,3 +1,10 @@
+USE MASTER
+go
+
+if exists(select * from sys.databases where name = 'RedBosch')
+	drop database RedBosch
+go
+
 create database RedBosch
 go
 Use RedBosch
@@ -7,7 +14,8 @@ create table Usuario(
 	Id int primary key,
 	Email varchar(100) not null,
 	Nome varchar(50) not null,
-	Senha varchar(150) not null,
+	Senha varbinary(150) not null,
+	Salt varchar(30) not null,
 	Data_Nascimento Date not null,
 	Imagem varbinary(max)
 )
@@ -17,6 +25,7 @@ create table Forum(
 	Titulo varchar(50) not null,
 	Descricao varchar(255) not null,
 	Inscritos int not null,
+	Imagem varbinary(max),
 	IdUsuario int not null,
 	foreign key(IdUsuario) references Usuario(Id),
 )
@@ -56,10 +65,22 @@ create table UsuarioCargo(
 
 create table Post(
 	Id int primary key,
+	Imagem varbinary(max),
 	Conteudo varchar(255) not null,
 	DataPublicacao date not null,
 	IdUsuario int not null,
 	foreign key(IdUsuario) references Usuario(Id),
+	IdForum int not null,
+	foreign key(IdForum) references Forum(Id),
+)
+
+create table Vote(
+	Id int primary key,
+	State BIT not null,
+	IdUsuario int not null,
+	IdPost int not null,
+	foreign key(IdUsuario) references Usuario(Id),
+	foreign key (IdPost) references Post(Id),
 )
 
 create table Comentario(

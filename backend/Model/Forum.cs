@@ -13,9 +13,13 @@ public partial class Forum
 
     public int Inscritos { get; set; }
 
+    public byte[]? Imagem { get; set; }
+
     public int IdUsuario { get; set; }
 
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+
+    public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 
     public virtual ICollection<UsuarioCargo> UsuarioCargos { get; set; } = new List<UsuarioCargo>();
 

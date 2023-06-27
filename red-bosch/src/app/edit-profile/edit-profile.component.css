@@ -1,4 +1,4 @@
-.card-profile{
+.edit-profile{
     background-color: var(--white);
     padding: 10px 20px 1px;
     border-radius: 8px;
@@ -6,7 +6,7 @@
     max-width: 500px;
 }
 
-.card-profile *{
+.edit-profile *{
     margin: 6px;
 }
 

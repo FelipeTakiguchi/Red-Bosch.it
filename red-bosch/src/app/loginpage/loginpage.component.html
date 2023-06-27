@@ -2,18 +2,16 @@
     <h1 *ngIf="isLogin">
         Log In
     </h1>
-    <h1 *ngIf="!isLogin">Sign in</h1>
-    <p>
-        <br>
-        <mat-form-field>
-            <mat-label>Email/Username</mat-label>
-            <input matInput>
-        </mat-form-field>
-    </p>
+    <h1 *ngIf="!isLogin">Sign Up</h1>
+    <app-custom-input *ngIf="isLogin" [label]="'Email/Username'"></app-custom-input>
+    <app-custom-input *ngIf="!isLogin" [label]="'Username'"></app-custom-input>
     <app-password [seePassword]="false" [breakLineOnInput]="true" />
     <router-outlet></router-outlet>
-    <p> 
-        <button mat-raised-button color="primary"><p *ngIf="isLogin">Log in</p><p *ngIf="!isLogin">Create your account</p></button>
+    <p>
+        <button mat-raised-button color="primary">
+            <p *ngIf="isLogin">Log in</p>
+            <p *ngIf="!isLogin">Create your account</p>
+        </button>
     </p>
     <p *ngIf="isLogin">
         Don't have an account? <a routerLink="newaccount" (click)="changeTemplate()">Create here!</a>
