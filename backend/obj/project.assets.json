@@ -1226,6 +1226,16 @@
             "rid": "win"
           }
         }
+      },
+      "seguranca-jwt/0.1.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/seguranca-jwt.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/seguranca-jwt.dll": {}
+        }
       }
     }
   },
@@ -3862,6 +3872,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "seguranca-jwt/0.1.0": {
+      "type": "project",
+      "path": "../security-jwt/security-jwt.csproj",
+      "msbuildProject": "../security-jwt/security-jwt.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3869,7 +3884,8 @@
       "Microsoft.AspNetCore.OpenApi >= 7.0.2",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.8",
-      "Swashbuckle.AspNetCore >= 6.4.0"
+      "Swashbuckle.AspNetCore >= 6.4.0",
+      "seguranca-jwt >= 0.1.0"
     ]
   },
   "packageFolders": {
@@ -3898,7 +3914,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\disrct\\Desktop\\Red-Bosch.it\\security-jwt\\security-jwt.csproj": {
+              "projectPath": "C:\\Users\\disrct\\Desktop\\Red-Bosch.it\\security-jwt\\security-jwt.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

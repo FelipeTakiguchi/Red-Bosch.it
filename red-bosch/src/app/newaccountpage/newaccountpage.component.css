@@ -7,3 +7,10 @@ mat-form-field{
     margin-bottom: 3vh;
     font-size: 20px;
 }
+
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

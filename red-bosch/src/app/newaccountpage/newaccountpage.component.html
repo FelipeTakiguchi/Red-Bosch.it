@@ -1,12 +1,14 @@
-<app-password></app-password>
-<app-custom-input [label]="'Email'"></app-custom-input>
-<br>
-<mat-form-field>
-  <mat-label>Date of Birth</mat-label>
-  <input matInput [matDatepicker]="picker">
-  <mat-hint>MM/DD/YYYY</mat-hint>
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-<br *ngIf="breakLineOnInput">
-<input type="file" id="file-get">
+<div class="center">
+  <app-password></app-password>
+  <app-custom-input [label]="'Email'"></app-custom-input>
+  <br>
+  <mat-form-field>
+    <mat-label>Date of Birth</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <br *ngIf="breakLineOnInput">
+  <app-uploader></app-uploader>
+</div>

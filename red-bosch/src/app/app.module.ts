@@ -28,6 +28,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CustomInputComponent } from './custom-input/custom-input.component';
 import { CustomProfileImgComponent } from './custom-profile-img/custom-profile-img.component';
+import { UploaderComponent } from './uploader/uploader.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { CustomProfileImgComponent } from './custom-profile-img/custom-profile-i
     EditProfileComponent,
     CustomInputComponent,
     CustomProfileImgComponent,
+    UploaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { CustomProfileImgComponent } from './custom-profile-img/custom-profile-i
     MatNativeDateModule,
     MatTabsModule,
     MatIconModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

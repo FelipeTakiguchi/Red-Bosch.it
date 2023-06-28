@@ -10,6 +10,19 @@ go
 Use RedBosch
 go
 
+create table ImageData(
+	ID int identity primary key,
+	Photo varbinary(MAX) not null
+);
+go
+
+create table Location(
+	ID int identity primary key,
+	Nome varchar(60) not null,
+	Photo int references ImageData(ID) null
+);
+go
+
 create table Usuario(
 	Id int primary key,
 	Email varchar(100) not null,
@@ -17,7 +30,7 @@ create table Usuario(
 	Senha varbinary(150) not null,
 	Salt varchar(30) not null,
 	Data_Nascimento Date not null,
-	Imagem varbinary(max)
+	Location int references Location(ID)
 )
 
 create table Forum(
@@ -25,7 +38,7 @@ create table Forum(
 	Titulo varchar(50) not null,
 	Descricao varchar(255) not null,
 	Inscritos int not null,
-	Imagem varbinary(max),
+	Location int references Location(ID),
 	IdUsuario int not null,
 	foreign key(IdUsuario) references Usuario(Id),
 )
@@ -65,7 +78,7 @@ create table UsuarioCargo(
 
 create table Post(
 	Id int primary key,
-	Imagem varbinary(max),
+	Location int references Location(ID),
 	Conteudo varchar(255) not null,
 	DataPublicacao date not null,
 	IdUsuario int not null,

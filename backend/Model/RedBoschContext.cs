@@ -21,6 +21,10 @@ public partial class RedBoschContext : DbContext
 
     public virtual DbSet<Forum> Forums { get; set; }
 
+    public virtual DbSet<ImageDatum> ImageData { get; set; }
+
+    public virtual DbSet<Location> Locations { get; set; }
+
     public virtual DbSet<Permissao> Permissaos { get; set; }
 
     public virtual DbSet<Post> Posts { get; set; }
@@ -41,7 +45,7 @@ public partial class RedBoschContext : DbContext
     {
         modelBuilder.Entity<Cargo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cargo__3214EC07632C7E79");
+            entity.HasKey(e => e.Id).HasName("PK__Cargo__3214EC074B830BAE");
 
             entity.ToTable("Cargo");
 
@@ -53,17 +57,17 @@ public partial class RedBoschContext : DbContext
             entity.HasOne(d => d.IdPermissaoNavigation).WithMany(p => p.Cargos)
                 .HasForeignKey(d => d.IdPermissao)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cargo__IdPermiss__2F10007B");
+                .HasConstraintName("FK__Cargo__IdPermiss__35BCFE0A");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Cargos)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cargo__IdUsuario__300424B4");
+                .HasConstraintName("FK__Cargo__IdUsuario__36B12243");
         });
 
         modelBuilder.Entity<Comentario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comentar__3214EC073CD4CC38");
+            entity.HasKey(e => e.Id).HasName("PK__Comentar__3214EC07DBD43C22");
 
             entity.ToTable("Comentario");
 
@@ -76,17 +80,17 @@ public partial class RedBoschContext : DbContext
             entity.HasOne(d => d.IdPostNavigation).WithMany(p => p.Comentarios)
                 .HasForeignKey(d => d.IdPost)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Comentari__IdPos__403A8C7D");
+                .HasConstraintName("FK__Comentari__IdPos__47DBAE45");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Comentarios)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Comentari__IdUsu__3F466844");
+                .HasConstraintName("FK__Comentari__IdUsu__46E78A0C");
         });
 
         modelBuilder.Entity<Forum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Forum__3214EC074870940F");
+            entity.HasKey(e => e.Id).HasName("PK__Forum__3214EC07D5240D62");
 
             entity.ToTable("Forum");
 
@@ -101,12 +105,39 @@ public partial class RedBoschContext : DbContext
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Forums)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Forum__IdUsuario__267ABA7A");
+                .HasConstraintName("FK__Forum__IdUsuario__2D27B809");
+
+            entity.HasOne(d => d.LocationNavigation).WithMany(p => p.Forums)
+                .HasForeignKey(d => d.Location)
+                .HasConstraintName("FK__Forum__Location__2C3393D0");
+        });
+
+        modelBuilder.Entity<ImageDatum>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ImageDat__3214EC2762CE23EC");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+        });
+
+        modelBuilder.Entity<Location>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Location__3214EC2713824653");
+
+            entity.ToTable("Location");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Nome)
+                .HasMaxLength(60)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.PhotoNavigation).WithMany(p => p.Locations)
+                .HasForeignKey(d => d.Photo)
+                .HasConstraintName("FK__Location__Photo__267ABA7A");
         });
 
         modelBuilder.Entity<Permissao>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Permissa__3214EC072441BCD8");
+            entity.HasKey(e => e.Id).HasName("PK__Permissa__3214EC07F78D8686");
 
             entity.ToTable("Permissao");
 
@@ -121,7 +152,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC071B8F107C");
+            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC0776029817");
 
             entity.ToTable("Post");
 
@@ -134,17 +165,21 @@ public partial class RedBoschContext : DbContext
             entity.HasOne(d => d.IdForumNavigation).WithMany(p => p.Posts)
                 .HasForeignKey(d => d.IdForum)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Post__IdForum__38996AB5");
+                .HasConstraintName("FK__Post__IdForum__403A8C7D");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Posts)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Post__IdUsuario__37A5467C");
+                .HasConstraintName("FK__Post__IdUsuario__3F466844");
+
+            entity.HasOne(d => d.LocationNavigation).WithMany(p => p.Posts)
+                .HasForeignKey(d => d.Location)
+                .HasConstraintName("FK__Post__Location__3E52440B");
         });
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC071F7A337E");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC07C55F74FC");
 
             entity.ToTable("Usuario");
 
@@ -162,11 +197,15 @@ public partial class RedBoschContext : DbContext
                 .HasMaxLength(30)
                 .IsUnicode(false);
             entity.Property(e => e.Senha).HasMaxLength(150);
+
+            entity.HasOne(d => d.LocationNavigation).WithMany(p => p.Usuarios)
+                .HasForeignKey(d => d.Location)
+                .HasConstraintName("FK__Usuario__Locatio__29572725");
         });
 
         modelBuilder.Entity<UsuarioCargo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UsuarioC__3214EC075B213E37");
+            entity.HasKey(e => e.Id).HasName("PK__UsuarioC__3214EC07DEC38D97");
 
             entity.ToTable("UsuarioCargo");
 
@@ -175,22 +214,22 @@ public partial class RedBoschContext : DbContext
             entity.HasOne(d => d.IdCargoNavigation).WithMany(p => p.UsuarioCargos)
                 .HasForeignKey(d => d.IdCargo)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UsuarioCa__IdCar__32E0915F");
+                .HasConstraintName("FK__UsuarioCa__IdCar__398D8EEE");
 
             entity.HasOne(d => d.IdForumNavigation).WithMany(p => p.UsuarioCargos)
                 .HasForeignKey(d => d.IdForum)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UsuarioCa__IdFor__34C8D9D1");
+                .HasConstraintName("FK__UsuarioCa__IdFor__3B75D760");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.UsuarioCargos)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UsuarioCa__IdUsu__33D4B598");
+                .HasConstraintName("FK__UsuarioCa__IdUsu__3A81B327");
         });
 
         modelBuilder.Entity<UsuarioForum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UsuarioF__3214EC07E631C031");
+            entity.HasKey(e => e.Id).HasName("PK__UsuarioF__3214EC07CF8D1116");
 
             entity.ToTable("UsuarioForum");
 
@@ -199,17 +238,17 @@ public partial class RedBoschContext : DbContext
             entity.HasOne(d => d.IdForumNavigation).WithMany(p => p.UsuarioForums)
                 .HasForeignKey(d => d.IdForum)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UsuarioFo__IdFor__2A4B4B5E");
+                .HasConstraintName("FK__UsuarioFo__IdFor__30F848ED");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.UsuarioForums)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UsuarioFo__IdUsu__29572725");
+                .HasConstraintName("FK__UsuarioFo__IdUsu__300424B4");
         });
 
         modelBuilder.Entity<Vote>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Vote__3214EC07DD159F29");
+            entity.HasKey(e => e.Id).HasName("PK__Vote__3214EC072AB288A4");
 
             entity.ToTable("Vote");
 
@@ -218,12 +257,12 @@ public partial class RedBoschContext : DbContext
             entity.HasOne(d => d.IdPostNavigation).WithMany(p => p.Votes)
                 .HasForeignKey(d => d.IdPost)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Vote__IdPost__3C69FB99");
+                .HasConstraintName("FK__Vote__IdPost__440B1D61");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Votes)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Vote__IdUsuario__3B75D760");
+                .HasConstraintName("FK__Vote__IdUsuario__4316F928");
         });
 
         OnModelCreatingPartial(modelBuilder);

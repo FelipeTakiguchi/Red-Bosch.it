@@ -7,7 +7,7 @@ public partial class Post
 {
     public int Id { get; set; }
 
-    public byte[]? Imagem { get; set; }
+    public int? Location { get; set; }
 
     public string Conteudo { get; set; } = null!;
 
@@ -22,6 +22,8 @@ public partial class Post
     public virtual Forum IdForumNavigation { get; set; } = null!;
 
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+
+    public virtual Location? LocationNavigation { get; set; }
 
     public virtual ICollection<Vote> Votes { get; set; } = new List<Vote>();
 }

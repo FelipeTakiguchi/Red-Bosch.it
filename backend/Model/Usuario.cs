@@ -17,13 +17,15 @@ public partial class Usuario
 
     public DateTime DataNascimento { get; set; }
 
-    public byte[]? Imagem { get; set; }
+    public int? Location { get; set; }
 
     public virtual ICollection<Cargo> Cargos { get; set; } = new List<Cargo>();
 
     public virtual ICollection<Comentario> Comentarios { get; set; } = new List<Comentario>();
 
     public virtual ICollection<Forum> Forums { get; set; } = new List<Forum>();
+
+    public virtual Location? LocationNavigation { get; set; }
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 

@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
+import { RegisterDTO } from 'src/DTO/RegisterDTO';
 
 @Component({
   selector: 'app-newaccountpage',
