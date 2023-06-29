@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class CustomProfileImgComponent {
   @Input() url: string | undefined;
+  @Input() size: string | undefined;
   @Input() inputStyle: string | undefined;
 
 }

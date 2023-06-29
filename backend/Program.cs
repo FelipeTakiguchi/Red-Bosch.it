@@ -34,7 +34,7 @@ builder.Services.AddTransient<IRepository<ImageDatum>, ImageRepository>();
 builder.Services.AddTransient<IRepository<Forum>, GroupRepository>();
 
 builder.Services.AddTransient<IPasswordProvider>(p =>{
-    return new PasswordProvider("senhadificil");
+    return new PasswordProvider("minhasenhaultrasecreta");
 });
 
 

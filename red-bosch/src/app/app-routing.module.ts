@@ -14,10 +14,8 @@ const routes: Routes = [
         path: "login",
         title: "Autentificação",
         component: LoginpageComponent,
-        children: [
-            { path: "newaccount", title: "Autentificação", component: NewaccountpageComponent }
-        ]
     },
+    { path: "newaccount", title: "Cadastro", component: NewaccountpageComponent},
     { path: "forumPage/:name", title: "Fórums", component: ForumPageComponent },
     { path: "forumPage", title: "Fórums", component: ForumPageComponent },
     { path: "createForumPage", title: "New Fórum", component: CreateForumPageComponent },

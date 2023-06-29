@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Reddit.Controllers;
+namespace backend.Controllers;
 
 using backend.Model;
 using backend.Repositories;
@@ -31,7 +31,6 @@ public class UserController : ControllerBase
         [FromServices] IPasswordHasher psh,
         [FromBody] UserSignup userData)
     {
-
         var query = await userRep.Filter(u => u.Nome == userData.Nome || u.Email == userData.Email);
 
         if(query.Count() > 0)
@@ -82,17 +81,19 @@ public class UserController : ControllerBase
     )
     {   
         var result = new LoginResult();
+        var emailList = await userRep.Filter(u => u.Email == loginData.Email);
+        var nameList = await userRep.Filter(u => u.Nome == loginData.Email);
 
-        var userList = await userRep.Filter(u => u.Email == loginData.Email);
-
-        result.UserExists = userList.Count() > 0;
-        if (!result.UserExists)
-        {
+        if (emailList.Count() == 0 && nameList.Count() == 0)        
             return Ok(result);
-        }
-        
-        Usuario target = userList.First();
 
+        Usuario target;
+
+        if(nameList.Count > 0)
+            target = nameList.First();
+        else
+            target = emailList.First();
+        
         if (psh.Validate(loginData.Senha, target.Senha, target.Salt))
         {
             string token = jwtService.GetToken<UserJwt>(new UserJwt { UserID = target.Id });

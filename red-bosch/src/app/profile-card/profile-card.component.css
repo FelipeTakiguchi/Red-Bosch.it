@@ -1,5 +1,9 @@
 .card-profile {
-    background-color: var(--white);
+    background-color: var(--gray);
+    border-color: white;
+    border-radius: 9px;
+    border-width: 1px;
+    border-style: solid;
     padding: 10px 20px 1px;
     border-radius: 8px;
     margin: 30px;

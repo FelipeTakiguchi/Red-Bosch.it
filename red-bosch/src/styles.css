@@ -10,25 +10,28 @@
     --rosewood: #570000;
     --burnt-sienna: #DE7C5A;
     --timber-wolf: #D7CDCC;
+    --gray: #DAE0E6;
+    --gray-100: #aeb9c4;
+    --gray-300: #8b949c;
+    --primary-color: #3f51b5;
+    --primary-color-100: #4c5fc5;
 }
 
 nav{
     font-size: 20px;
-    margin: 0px 0px 10px;
 }
 
-header, footer{    
-    background-color: var(--white);
+header{    
+    background-color: var(--gray-100);
 }
 
 footer{
-    min-height: 5vh;
-}
-
-footer > *{
-    font-weight: 900;
-    font-size: 20px;
-    margin-left: 84vw !important;
+    padding-right: 10px;
+    font-weight: bolder;
+    font-size: x-large;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 body {
@@ -36,3 +39,13 @@ body {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.vl {
+    border-left: .5px solid whitesmoke;
+    min-height: 100px;
+}
+
+hr{
+    border-color: var(--raisin-black);
+    margin: 0px !important;
+}

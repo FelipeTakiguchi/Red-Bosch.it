@@ -14,22 +14,26 @@ export class PasswordComponent implements OnInit {
   @Input() canSeePassword = true;
   @Input() seePassword = false
   @Output() seePasswordChanged = new EventEmitter<boolean>();
-  
-  protected checked = false ;
+
+  protected checked = false;
   protected inputType = "password";
   protected inputStyle = "color: black;"
   protected inputText = "";
   protected initialState = true;
-  
+
   ngOnInit(): void {
-  
+
   }
 
   protected showPassword() {
-    if(this.checked)
+    if (this.checked)
       this.inputType = "text";
     else
       this.inputType = "password";
-    
+
+  }
+
+  protected passwordChanged() {
+    this.valueChanged.emit(this.inputText)
   }
 }

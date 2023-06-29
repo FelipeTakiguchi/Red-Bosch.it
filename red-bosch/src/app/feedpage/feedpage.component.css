@@ -1,5 +1,6 @@
 .main{
     display: flex;
+    gap: 20vh;
 }
 
 .cards{

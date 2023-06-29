@@ -1,7 +1,11 @@
 .forum-card {
     width: 800px;
     min-height: 100px;
-    background-color: var(--white);
+    background-color: var(--gray);
+    border-width: 1px;
+    border-color: white;
+    border-radius: 9px;
+    border-style: solid;
     margin: 30px;
     padding: 10px;
 }

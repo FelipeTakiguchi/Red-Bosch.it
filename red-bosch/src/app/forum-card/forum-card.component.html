@@ -2,20 +2,23 @@
     <div class="content">
         <div class="vote">
             <button (click)="changeUpvote()">
-                <i id="upvote" [ngStyle]="{'color': Upvoted? 'green' : 'black'}"
-                    class="fas fa-arrow-up upvote"></i>
+                <i id="upvote" [ngStyle]="{'color': Upvoted? 'green' : 'white'}" class="fas fa-arrow-up upvote"></i>
             </button>
             <p class="votes-count">0</p>
             <button (click)="changeDownvote()">
-                <i id="downvote" [ngStyle]="{'color': Downvoted? 'red' : 'black'}"
+                <i id="downvote" [ngStyle]="{'color': Downvoted? 'red' : 'white'}"
                     class="fas fa-arrow-down downvote"></i>
             </button>
         </div>
         <div class="vl"></div>
         <div class="main">
+            <div class="info">
+                <app-custom-profile-img [size]="'35px'" [url]="'https://th.bing.com/th/id/R.7a1e6365fc61a29de35cb77d9d9f90c3?rik=iUywfIur6zHahg&pid=ImgRaw&r=0'"></app-custom-profile-img>
+                <p class="pub">Published by: Anonymous</p>
+            </div>
+            <br>
             <h1 class="tittle">Tópic</h1>
             <p>Text example</p>
-            <h5>Published by: Anonymous</h5>
         </div>
     </div>
 </div>

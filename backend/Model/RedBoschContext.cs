@@ -45,11 +45,10 @@ public partial class RedBoschContext : DbContext
     {
         modelBuilder.Entity<Cargo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cargo__3214EC074B830BAE");
+            entity.HasKey(e => e.Id).HasName("PK__Cargo__3214EC076AD32A8E");
 
             entity.ToTable("Cargo");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Nome)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -67,11 +66,10 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Comentario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comentar__3214EC07DBD43C22");
+            entity.HasKey(e => e.Id).HasName("PK__Comentar__3214EC0734FA3446");
 
             entity.ToTable("Comentario");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Conteudo)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -90,11 +88,10 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Forum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Forum__3214EC07D5240D62");
+            entity.HasKey(e => e.Id).HasName("PK__Forum__3214EC07ADAEC78E");
 
             entity.ToTable("Forum");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Descricao)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -114,14 +111,14 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<ImageDatum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ImageDat__3214EC2762CE23EC");
+            entity.HasKey(e => e.Id).HasName("PK__ImageDat__3214EC2752336D4E");
 
             entity.Property(e => e.Id).HasColumnName("ID");
         });
 
         modelBuilder.Entity<Location>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Location__3214EC2713824653");
+            entity.HasKey(e => e.Id).HasName("PK__Location__3214EC279612A5BA");
 
             entity.ToTable("Location");
 
@@ -137,11 +134,10 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Permissao>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Permissa__3214EC07F78D8686");
+            entity.HasKey(e => e.Id).HasName("PK__Permissa__3214EC078BF0903E");
 
             entity.ToTable("Permissao");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Descricao)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -152,11 +148,10 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC0776029817");
+            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC07F56F12A4");
 
             entity.ToTable("Post");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Conteudo)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -179,11 +174,10 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC07C55F74FC");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC07F507D747");
 
             entity.ToTable("Usuario");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.DataNascimento)
                 .HasColumnType("date")
                 .HasColumnName("Data_Nascimento");
@@ -205,11 +199,9 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<UsuarioCargo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UsuarioC__3214EC07DEC38D97");
+            entity.HasKey(e => e.Id).HasName("PK__UsuarioC__3214EC07FC260C5D");
 
             entity.ToTable("UsuarioCargo");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdCargoNavigation).WithMany(p => p.UsuarioCargos)
                 .HasForeignKey(d => d.IdCargo)
@@ -229,11 +221,9 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<UsuarioForum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UsuarioF__3214EC07CF8D1116");
+            entity.HasKey(e => e.Id).HasName("PK__UsuarioF__3214EC07337364F8");
 
             entity.ToTable("UsuarioForum");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdForumNavigation).WithMany(p => p.UsuarioForums)
                 .HasForeignKey(d => d.IdForum)
@@ -248,11 +238,9 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Vote>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Vote__3214EC072AB288A4");
+            entity.HasKey(e => e.Id).HasName("PK__Vote__3214EC07DAA49085");
 
             entity.ToTable("Vote");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdPostNavigation).WithMany(p => p.Votes)
                 .HasForeignKey(d => d.IdPost)

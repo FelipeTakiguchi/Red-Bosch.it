@@ -1,14 +1,26 @@
-<div class="center">
-  <app-password></app-password>
-  <app-custom-input [label]="'Email'"></app-custom-input>
+<div class="card">
+  <h1>
+    Sign Up
+  </h1>
+  <app-custom-input name="Nome" ngDefaultControl [(ngModel)]="Nome" [label]="'Username'"></app-custom-input>
+  <app-password (valueChanged)="passwordChanged1($event)" [seePassword]="false" [breakLineOnInput]="true" />
+  <app-password (valueChanged)="passwordChanged2($event)" [seePassword]="false"
+    [breakLineOnInput]="true"></app-password>
+  <app-custom-input name="Email" ngDefaultControl [(ngModel)]="Email" [label]="'Email'"></app-custom-input>
   <br>
   <mat-form-field>
     <mat-label>Date of Birth</mat-label>
-    <input matInput [matDatepicker]="picker">
+    <input matInput [matDatepicker]="picker" [(ngModel)]="DataNascimento" [max]="maxDate">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <br *ngIf="breakLineOnInput">
-  <app-uploader></app-uploader>
+  <app-uploader name="Foto" ngDefaultControl [(ngModel)]="Foto" ></app-uploader>
+  <button (click)="onRegister()" mat-raised-button color="primary">
+    <p>Sign up</p>
+  </button>
+  <p>
+    Already have an account? <a routerLink='/login'>Log in!</a>
+  </p>
 </div>

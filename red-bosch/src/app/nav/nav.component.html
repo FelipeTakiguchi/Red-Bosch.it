@@ -1,11 +1,12 @@
-<ul>
-    <li>
-        <a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
-    </li>
-    <li>
-        <a routerLink="/forumPage" routerLinkActive="active" ariaCurrentWhenActive="page">Fóruns</a>
-    </li>
-    <li>
-        <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
-    </li>
-</ul>
+
+<nav mat-tab-nav-bar>
+    <a mat-tab-link routerLink="/" [active]="selected == 1? true: false">
+        Feed
+    </a>
+    <a mat-tab-link routerLink="/forumPage" [active]="selected == 2? true: false">
+        Fórums
+    </a>
+    <a mat-tab-link routerLink="/login" [active]="selected == 3? true: false">
+        Login
+    </a>
+</nav>
