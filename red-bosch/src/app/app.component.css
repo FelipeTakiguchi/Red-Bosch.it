@@ -6,7 +6,7 @@ header {
 header {
     display: flex;
     justify-content: center;
-    min-height: 8vh;
+    min-height: 10vh;
 }
 
 header > a > img {
@@ -14,7 +14,7 @@ header > a > img {
 }
 
 nav{
-    min-height: 7vh;
+    min-height: 5vh;
     background-color: var(--gray);
 }
 

@@ -2,7 +2,6 @@ import { Component, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { LoginDTO } from 'src/DTO/LoginDTO';
-import { RegisterDTO } from 'src/DTO/RegisterDTO';
 
 @Component({
   selector: 'app-loginpage',
@@ -25,12 +24,13 @@ export class LoginpageComponent {
 
   onLogin() {
     this.userLogin.Email = this.Email;
-    this.userLogin.Senha = this.Senha;
+    this.userLogin.Senha = this.Senha;"string"
+
     console.log(this.userLogin)
     this.userService.login(this.userLogin)
       .subscribe(res => {
         var body: any = res.body
-        console.log(res)
+        console.log(body.jwt)
         if (body.success) {
           sessionStorage.setItem("jwtSession", body.jwt)
           this.router.navigate(["/"])

@@ -29,4 +29,10 @@ export class UserService {
             observe: 'response',
         })
     }
+
+    getUser(jwt: Jwt) {
+        return this.http.post<UserToken>('http://localhost:5022/getUser', jwt, { 
+            observe: 'response',
+        })
+    }
 }

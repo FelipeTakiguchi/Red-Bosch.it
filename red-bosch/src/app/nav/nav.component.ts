@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -7,21 +7,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 
-export class NavComponent{
+export class NavComponent implements OnInit, OnDestroy {
   @Input() selected: number = 0;
 
-  constructor(private router: Router) {
-    router.events.subscribe((val) => {
-      console.log(this.selected)
-      console.log(this.router.url)
-      if (this.router.url == "/") {
+  constructor(private router: Router){}
+
+  ngOnDestroy(): void {
+  }
+
+  ngOnInit(): void {
+    this.router.events.subscribe((val) => {
+      let isNavEnd = val instanceof NavigationEnd;
+      if (!isNavEnd)
+        return;
+      
+      if (location.pathname == "/")
         this.selected = 1;
-      } else if(this.router.url == "/forumPage"){
+      else if (location.pathname == "/forumPage")
         this.selected = 2;
-      } else if(this.router.url == "/login"){
+      else if (location.pathname == "/login")
         this.selected = 3;
-      }
-      console.log(this.router.url == "/forumPage")
     })
   }
 }

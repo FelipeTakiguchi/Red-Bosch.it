@@ -106,4 +106,32 @@ public class UserController : ControllerBase
         result.Success = false;
         return Ok(result);
     }
+
+    [HttpPost("/getUser")]
+    public async Task<ActionResult<Usuario>> getUser(
+        [FromServices] IJwtService jwtService,
+        [FromServices] IUserRepository userRepository,
+        [FromBody] string jwt
+    )
+    {
+        try {
+            var result = jwtService.Validate<UserJwt>(jwt);
+            var query = await userRepository.Filter(u => u.Id == result.UserID);
+            
+            Console.WriteLine(query[0]);
+            Console.WriteLine(result);
+
+            Usuario u = new Usuario()
+            {
+                Nome = query[0].Nome,
+                Email = query[0].Email,
+                Location = query[0].Location,
+                DataNascimento = query[0].DataNascimento,
+            };
+
+            return u;
+        } catch(Exception e){
+            return BadRequest(e.Message);
+        }
+    }
 }

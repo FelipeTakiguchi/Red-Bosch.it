@@ -10,7 +10,7 @@
     border: 3px;
     border-radius: 8px;
     align-items: center;
-    background-color: var(--white);
+    background-color: var(--gray);
     width: 500px;
 }
 
