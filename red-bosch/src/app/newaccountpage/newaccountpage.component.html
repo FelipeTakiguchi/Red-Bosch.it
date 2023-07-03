@@ -16,7 +16,7 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <br *ngIf="breakLineOnInput">
-  <app-uploader name="Foto" ngDefaultControl [(ngModel)]="Foto" ></app-uploader>
+  <app-uploader name="Foto" (onUploadFinished)="onHandleUpload($event)" ngDefaultControl [(ngModel)]="Foto" ></app-uploader>
   <button (click)="onRegister()" mat-raised-button color="primary">
     <p>Sign up</p>
   </button>

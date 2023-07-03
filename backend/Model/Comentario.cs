@@ -7,7 +7,7 @@ public partial class Comentario
 {
     public int Id { get; set; }
 
-    public string Conteudo { get; set; } = null!;
+    public string Conteudo { get; set; }
 
     public DateTime DataPublicacao { get; set; }
 
@@ -15,7 +15,7 @@ public partial class Comentario
 
     public int IdPost { get; set; }
 
-    public virtual Post IdPostNavigation { get; set; } = null!;
+    public virtual Post IdPostNavigation { get; set; }
 
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public virtual Usuario IdUsuarioNavigation { get; set; }
 }

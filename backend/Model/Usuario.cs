@@ -7,13 +7,13 @@ public partial class Usuario
 {
     public int Id { get; set; }
 
-    public string Email { get; set; } = null!;
+    public string Email { get; set; }
 
-    public string Nome { get; set; } = null!;
+    public string Nome { get; set; }
 
-    public byte[] Senha { get; set; } = null!;
+    public byte[] Senha { get; set; }
 
-    public string Salt { get; set; } = null!;
+    public string Salt { get; set; }
 
     public DateTime DataNascimento { get; set; }
 
@@ -25,7 +25,7 @@ public partial class Usuario
 
     public virtual ICollection<Forum> Forums { get; set; } = new List<Forum>();
 
-    public virtual Location? LocationNavigation { get; set; }
+    public virtual Location LocationNavigation { get; set; }
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 

@@ -30,7 +30,7 @@ create table Usuario(
 	Senha varbinary(150) not null,
 	Salt varchar(30) not null,
 	Data_Nascimento Date not null,
-	Location int references Location(ID)
+	Profile_Photo varbinary(MAX) not null,
 )
 
 create table Forum(

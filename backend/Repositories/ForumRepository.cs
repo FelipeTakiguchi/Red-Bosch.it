@@ -32,6 +32,11 @@ public class GroupRepository : IRepository<Forum>
         return query.ToListAsync();
     }
 
+    public Task<int?> GetLastIndex()
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task Save()
     {
         await this.ctx.SaveChangesAsync();

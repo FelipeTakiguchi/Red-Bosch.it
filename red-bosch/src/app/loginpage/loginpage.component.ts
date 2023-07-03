@@ -24,11 +24,12 @@ export class LoginpageComponent {
 
   onLogin() {
     this.userLogin.Email = this.Email;
-    this.userLogin.Senha = this.Senha;"string"
+    this.userLogin.Senha = this.Senha;
 
     console.log(this.userLogin)
     this.userService.login(this.userLogin)
       .subscribe(res => {
+        console.log(res);
         var body: any = res.body
         console.log(body.jwt)
         if (body.success) {

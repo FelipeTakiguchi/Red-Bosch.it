@@ -31,34 +31,30 @@ export class NewaccountpageComponent {
   @Input()
   Foto!: string;
   maxDate: Date = new Date();
+  fileToUpload: File | undefined;
+  formData = new FormData();
+
+  protected onHandleUpload(event : any) {
+    this.formData = event
+  }
 
   constructor(private userService: UserService, private router: Router) { }
-
-  userRegister: RegisterDTO = {
-    Nome: '',
-    Senha: '',
-    Email: '',
-    DataNascimento: new Date(),
-  };
-
-  userPhoto: LocationDTO = {
-    Nome: '',
-    Photo: 0,
-  };
    
-  onRegister() {
+  onRegister() {    
     if (this.Senha === this.ConfirmaSenha) {
-      this.userRegister.Nome = this.Nome;
-      this.userRegister.Senha = this.Senha;
-      this.userRegister.Email = this.Email;
-      this.userRegister.DataNascimento = this.DataNascimento;
-      this.userService.register(this.userRegister)
+      const formData = new FormData();
+      formData.append('nome', this.Nome)
+      formData.append('email', this.Email)
+      formData.append('senha', this.Senha)
+      formData.append('dataNascimento', this.DataNascimento.toString())      
+      console.log(formData.get('nome'))
+      this.userService.register(formData)
         .subscribe(res => {
           var body: any = res.status
           console.log(res)
           if (body == 200) {
             sessionStorage.setItem("jwtSession", body.jwt)
-            this.router.navigate(["/"])
+            this.router.navigate(["/login"])
           }
         })
     }

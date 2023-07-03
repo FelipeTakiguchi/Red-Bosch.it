@@ -30,7 +30,7 @@ builder.Services.AddTransient<IJwtService, JwtService>();
 
 builder.Services.AddTransient<RedBoschContext>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IRepository<ImageDatum>, ImageRepository>(); 
+builder.Services.AddTransient<ILocationRepository, ImageRepository>(); 
 builder.Services.AddTransient<IRepository<Forum>, GroupRepository>();
 
 builder.Services.AddTransient<IPasswordProvider>(p =>{

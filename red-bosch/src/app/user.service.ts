@@ -4,6 +4,7 @@ import { RegisterDTO } from 'src/DTO/RegisterDTO';
 import { LoginDTO } from 'src/DTO/LoginDTO';
 import { UserToken } from 'src/DTO/Token';
 import { Jwt } from 'src/DTO/Jwt';
+import { UserDTO } from 'src/DTO/UserDTO';
 
 @Injectable({
     providedIn: 'root',
@@ -18,8 +19,8 @@ export class UserService {
         });
     }
 
-    register(registerData: RegisterDTO) {
-        return this.http.post('http://localhost:5022/register', registerData, {
+    register(formData: FormData) {
+        return this.http.post(' http://localhost:5022/register', formData, {
             observe: 'response',
         });
     }
@@ -31,7 +32,7 @@ export class UserService {
     }
 
     getUser(jwt: Jwt) {
-        return this.http.post<UserToken>('http://localhost:5022/getUser', jwt, { 
+        return this.http.post<UserDTO>('http://localhost:5022/getUser', jwt, { 
             observe: 'response',
         })
     }

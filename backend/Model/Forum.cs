@@ -7,9 +7,9 @@ public partial class Forum
 {
     public int Id { get; set; }
 
-    public string Titulo { get; set; } = null!;
+    public string Titulo { get; set; }
 
-    public string Descricao { get; set; } = null!;
+    public string Descricao { get; set; }
 
     public int Inscritos { get; set; }
 
@@ -17,9 +17,9 @@ public partial class Forum
 
     public int IdUsuario { get; set; }
 
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public virtual Usuario IdUsuarioNavigation { get; set; }
 
-    public virtual Location? LocationNavigation { get; set; }
+    public virtual Location LocationNavigation { get; set; }
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 

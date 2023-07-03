@@ -11,7 +11,7 @@ public partial class UsuarioForum
 
     public int IdForum { get; set; }
 
-    public virtual Forum IdForumNavigation { get; set; } = null!;
+    public virtual Forum IdForumNavigation { get; set; }
 
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public virtual Usuario IdUsuarioNavigation { get; set; }
 }

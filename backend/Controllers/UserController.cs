@@ -28,45 +28,65 @@ public class UserController : ControllerBase
     [HttpPost("/register")]
     public async Task<ActionResult> Register(
         [FromServices] IUserRepository userRep,
+        [FromServices] ILocationRepository lcr,
         [FromServices] IPasswordHasher psh,
-        [FromBody] UserSignup userData)
+        [FromServices] ILocationRepository imgr)
     {
-        var query = await userRep.Filter(u => u.Nome == userData.Nome || u.Email == userData.Email);
+        var files = Request.Form.Files;
+    
+        if(files.Count > 0){
+            var file = Request.Form.Files[0];
+            using MemoryStream ms = new MemoryStream();
+            await file.CopyToAsync(ms);
+            var data = ms.GetBuffer();
 
-        if(query.Count() > 0)
-            return BadRequest();
-        
+            var img = new ImageDatum();
+            img.Photo = data;
+            await lcr.Add(img);
+        }
+        Console.WriteLine(Request.Form["nome"]);
+        Console.WriteLine(Request.Form["email"]);
+        // var query = await userRep.Filter(u => u.Nome == Request.Form["nome"] || u.Email == Request.Form["email"]);
+
+        // if (query.Count() > 0)
+        //     return BadRequest();
+
+
         byte[] hashPassword;
         string salt;
 
-        (hashPassword, salt) = psh.GetHashAndSalt(userData.Senha);
+        (hashPassword, salt) = psh.GetHashAndSalt(Request.Form["senha"]);
 
         Usuario u = new Usuario()
         {
-            Nome = userData.Nome,
-            Email = userData.Email,
+            Nome = Request.Form["nome"],
+            Email = Request.Form["email"],
             Senha = hashPassword,
             Salt = salt,
             Location = null,
-            DataNascimento = userData.DataNascimento,
+            
         };
+
+        // u.Location = await imgr.GetLastIndex();
 
         await userRep.Add(u);
 
         return Ok();
-
     }
 
     [HttpPost("/validate")]
-    public async Task<ActionResult<bool>> ValidateJwt(
+    public ActionResult<bool> ValidateJwt(
         [FromServices] IJwtService jwtService,
         [FromBody] string jwt
     )
     {
-        try {
+        try
+        {
             var result = jwtService.Validate<UserJwt>(jwt);
             return Ok(true);
-        } catch(Exception e){
+        }
+        catch (Exception e)
+        {
             return BadRequest(e.Message);
         }
     }
@@ -79,21 +99,21 @@ public class UserController : ControllerBase
         [FromServices] IUserRepository userRep,
         [FromServices] IJwtService jwtService
     )
-    {   
+    {
         var result = new LoginResult();
         var emailList = await userRep.Filter(u => u.Email == loginData.Email);
         var nameList = await userRep.Filter(u => u.Nome == loginData.Email);
 
-        if (emailList.Count() == 0 && nameList.Count() == 0)        
+        if (emailList.Count() == 0 && nameList.Count() == 0)
             return Ok(result);
 
         Usuario target;
 
-        if(nameList.Count > 0)
+        if (nameList.Count > 0)
             target = nameList.First();
         else
             target = emailList.First();
-        
+
         if (psh.Validate(loginData.Senha, target.Senha, target.Salt))
         {
             string token = jwtService.GetToken<UserJwt>(new UserJwt { UserID = target.Id });
@@ -111,14 +131,17 @@ public class UserController : ControllerBase
     public async Task<ActionResult<Usuario>> getUser(
         [FromServices] IJwtService jwtService,
         [FromServices] IUserRepository userRepository,
-        [FromBody] string jwt
+        [FromBody] JwtDTO jwt
     )
     {
-        try {
-            var result = jwtService.Validate<UserJwt>(jwt);
+        Console.WriteLine(jwt);
+        try
+        {
+            Console.WriteLine(jwt);
+            var result = jwtService.Validate<UserJwt>(jwt.Jwt);
             var query = await userRepository.Filter(u => u.Id == result.UserID);
-            
-            Console.WriteLine(query[0]);
+
+            Console.WriteLine(query[0].Nome);
             Console.WriteLine(result);
 
             Usuario u = new Usuario()
@@ -130,7 +153,9 @@ public class UserController : ControllerBase
             };
 
             return u;
-        } catch(Exception e){
+        }
+        catch (Exception e)
+        {
             return BadRequest(e.Message);
         }
     }

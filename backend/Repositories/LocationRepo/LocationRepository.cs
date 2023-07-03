@@ -5,7 +5,7 @@ namespace backend.Repositories;
 using backend.Model;
 
 
-public class ImageRepository : IRepository<ImageDatum>
+public class ImageRepository : ILocationRepository
 {
     private RedBoschContext ctx;
 
@@ -39,5 +39,13 @@ public class ImageRepository : IRepository<ImageDatum>
     public async Task Save()
     {
         await ctx.SaveChangesAsync();
+    }
+
+    public async Task<int> GetLastIndex(){
+        var img = await ctx.ImageData.LastOrDefaultAsync();
+        if(img != null)
+            return img.Id;
+
+        return 0; 
     }
 }

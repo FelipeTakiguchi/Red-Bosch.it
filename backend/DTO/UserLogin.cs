@@ -3,6 +3,6 @@ namespace backend.DTO;
 
 public class UserLogin
 {
-    public string Email { get; set;}
-    public string Senha { get; set;}
+    public required string Email { get; set;}
+    public required string Senha { get; set;}
 }
