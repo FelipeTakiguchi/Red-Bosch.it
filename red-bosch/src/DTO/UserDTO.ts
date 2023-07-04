@@ -1,6 +1,7 @@
 export interface UserDTO {
     nome: string;
     email: string;
-    dataNascimento: Date; 
-    location: number; 
+    descricao: string;
+    dataNascimento: Date;
+    imageId: number;
 }

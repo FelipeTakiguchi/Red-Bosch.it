@@ -1,13 +1,7 @@
 <div class="main">
-    <app-profile-card></app-profile-card>
-    <div class="cards">
-        <app-forum-card-page></app-forum-card-page>
-        <app-forum-card-page></app-forum-card-page>
-        <app-forum-card-page></app-forum-card-page>
-        <app-forum-card-page></app-forum-card-page>
-        <app-forum-card-page></app-forum-card-page>
-        <app-forum-card-page></app-forum-card-page>
-        <app-forum-card-page></app-forum-card-page>
+    <app-profile-card [nome]="Nome" [url]="url"></app-profile-card>
+    <div class="cards" *ngFor="let forum of forums">
+        <app-forum-card-page [title]="forum.titulo" [description]="forum.descricao" [userName]="'ninguem'"></app-forum-card-page>
     </div>
     <button routerLink="/createForumPage"><mat-icon fontIcon="+"></mat-icon></button>
 </div>

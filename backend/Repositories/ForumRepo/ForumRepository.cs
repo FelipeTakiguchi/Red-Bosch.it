@@ -7,11 +7,11 @@ using System;
 using System.Collections.Generic;
 using backend.Model;
 
-public class GroupRepository : IRepository<Forum>
+public class ForumRepository : IForumRepository
 {
     private RedBoschContext ctx;
 
-    public GroupRepository(RedBoschContext ctx)
+    public ForumRepository(RedBoschContext ctx)
         => this.ctx = ctx;
 
     public async Task Add(Forum obj)
@@ -32,11 +32,6 @@ public class GroupRepository : IRepository<Forum>
         return query.ToListAsync();
     }
 
-    public Task<int?> GetLastIndex()
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task Save()
     {
         await this.ctx.SaveChangesAsync();
@@ -48,4 +43,8 @@ public class GroupRepository : IRepository<Forum>
         await ctx.SaveChangesAsync();
     }
 
+    Task<int> IForumRepository.GetLastIndex()
+    {
+        throw new NotImplementedException();
+    }
 }

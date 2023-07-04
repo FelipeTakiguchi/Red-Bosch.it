@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { RegisterDTO } from 'src/DTO/RegisterDTO';
-import { LocationDTO } from 'src/DTO/LocationDTO';
 
 @Component({
   selector: 'app-newaccountpage',
@@ -11,8 +9,6 @@ import { LocationDTO } from 'src/DTO/LocationDTO';
 })
 
 export class NewaccountpageComponent {
-  // Inputs podem ser acessados de fora do componente como propriedades HTML
-  // Outputs podem ser acessados de fora do componente como eventos no estilo onclick
   @Output() valueChanged = new EventEmitter<string>();
   @Input() breakLineOnInput = true;
   @Input() canSeePassword = true;
@@ -42,13 +38,16 @@ export class NewaccountpageComponent {
    
   onRegister() {    
     if (this.Senha === this.ConfirmaSenha) {
-      const formData = new FormData();
-      formData.append('nome', this.Nome)
-      formData.append('email', this.Email)
-      formData.append('senha', this.Senha)
-      formData.append('dataNascimento', this.DataNascimento.toString())      
-      console.log(formData.get('nome'))
-      this.userService.register(formData)
+      this.formData.delete('nome')
+      this.formData.delete('email')
+      this.formData.delete('senha')
+      this.formData.delete('dataNascimento')
+      this.formData.append('nome', this.Nome)
+      this.formData.append('email', this.Email)
+      this.formData.append('senha', this.Senha)
+      this.formData.append('dataNascimento', this.DataNascimento.toLocaleDateString())
+      console.log(this.formData.get('nome'))
+      this.userService.register(this.formData)
         .subscribe(res => {
           var body: any = res.status
           console.log(res)

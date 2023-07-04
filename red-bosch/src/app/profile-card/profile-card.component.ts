@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ProfileCardComponent {
   @Input() nome: string | undefined;
+  @Input() url: string | undefined;
 }

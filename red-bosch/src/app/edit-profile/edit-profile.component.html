@@ -2,13 +2,13 @@
     <h1>Edit Profile</h1>
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput value="Felipe N">
+        <input matInput value={{Nome}}>
     </mat-form-field>
     <app-uploader></app-uploader>
     <div class="content">
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <textarea matInput placeholder="This fórum is..." value="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et illum animi exercitationem, ducimus mollitia aliquid omnis delectus, cupiditate nobis cumque ipsa quod soluta explicabo eveniet. Et vel quae expedita recusandae."></textarea>
+            <textarea matInput placeholder="This fórum is..." value={{Descricao}}></textarea>
         </mat-form-field>
         <button mat-raised-button color="primary" routerLink="/editProfile">Confirm</button>
     </div>

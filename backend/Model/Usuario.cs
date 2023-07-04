@@ -11,13 +11,15 @@ public partial class Usuario
 
     public string Nome { get; set; }
 
+    public string Descricao { get; set; }
+
     public byte[] Senha { get; set; }
 
     public string Salt { get; set; }
 
     public DateTime DataNascimento { get; set; }
 
-    public int? Location { get; set; }
+    public int? ImageId { get; set; }
 
     public virtual ICollection<Cargo> Cargos { get; set; } = new List<Cargo>();
 
@@ -25,7 +27,7 @@ public partial class Usuario
 
     public virtual ICollection<Forum> Forums { get; set; } = new List<Forum>();
 
-    public virtual Location LocationNavigation { get; set; }
+    public virtual ImageDatum Image { get; set; }
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 

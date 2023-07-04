@@ -1,20 +1,15 @@
 <div class="card">
     <h1>New Fórum</h1>
-    <p>
-        <br>
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput>
-        </mat-form-field>
-    </p>
+    <app-custom-input name="Nome" ngDefaultControl [(ngModel)]="Nome" [label]="'Title'"></app-custom-input>
+  
     <p>
         <br>
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <textarea matInput placeholder="This fórum is..."></textarea>
+            <textarea matInput [(ngModel)]="Descricao" placeholder="This fórum is..."></textarea>
         </mat-form-field>
     </p>
-    <app-uploader></app-uploader>
+    <app-uploader name="Foto" (onUploadFinished)="onHandleUpload($event)" ngDefaultControl [(ngModel)]="Foto" ></app-uploader>
     <br>
     <button mat-raised-button color="primary" (click)="CreateForum()">Create</button>
 </div>

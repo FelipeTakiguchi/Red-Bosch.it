@@ -5,7 +5,7 @@ namespace backend.Repositories;
 using backend.Model;
 
 
-public class ImageRepository : ILocationRepository
+public class ImageRepository : IImageRepository
 {
     private RedBoschContext ctx;
 
@@ -42,7 +42,7 @@ public class ImageRepository : ILocationRepository
     }
 
     public async Task<int> GetLastIndex(){
-        var img = await ctx.ImageData.LastOrDefaultAsync();
+        var img = await ctx.ImageData.OrderBy(img => img.Id).LastOrDefaultAsync();
         if(img != null)
             return img.Id;
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-forum-card-page',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./forum-card-page.component.css']
 })
 export class ForumCardPageComponent {
+  @Input() title: string = '';
+  @Input() description: string = '';
+  @Input() userName: string = '';
 
 }

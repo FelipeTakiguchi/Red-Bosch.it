@@ -13,13 +13,13 @@ public partial class Forum
 
     public int Inscritos { get; set; }
 
-    public int? Location { get; set; }
+    public int? ImageId { get; set; }
 
     public int IdUsuario { get; set; }
 
     public virtual Usuario IdUsuarioNavigation { get; set; }
 
-    public virtual Location LocationNavigation { get; set; }
+    public virtual ImageDatum Image { get; set; }
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 

@@ -7,7 +7,7 @@ public partial class Post
 {
     public int Id { get; set; }
 
-    public int? Location { get; set; }
+    public int? ImageId { get; set; }
 
     public string Conteudo { get; set; }
 
@@ -23,7 +23,7 @@ public partial class Post
 
     public virtual Usuario IdUsuarioNavigation { get; set; }
 
-    public virtual Location LocationNavigation { get; set; }
+    public virtual ImageDatum Image { get; set; }
 
     public virtual ICollection<Vote> Votes { get; set; } = new List<Vote>();
 }

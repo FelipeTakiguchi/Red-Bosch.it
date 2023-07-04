@@ -16,21 +16,15 @@ create table ImageData(
 );
 go
 
-create table Location(
-	ID int identity primary key,
-	Nome varchar(60) not null,
-	Photo int references ImageData(ID) null
-);
-go
 
 create table Usuario(
-	Id int primary key,
+	Id int primary key identity,
 	Email varchar(100) not null,
 	Nome varchar(50) not null,
 	Senha varbinary(150) not null,
 	Salt varchar(30) not null,
 	Data_Nascimento Date not null,
-	Profile_Photo varbinary(MAX) not null,
+	ImageId int References ImageData(Id),
 )
 
 create table Forum(
@@ -38,7 +32,7 @@ create table Forum(
 	Titulo varchar(50) not null,
 	Descricao varchar(255) not null,
 	Inscritos int not null,
-	Location int references Location(ID),
+	ImageId int References ImageData(Id),
 	IdUsuario int not null,
 	foreign key(IdUsuario) references Usuario(Id),
 )
@@ -78,7 +72,7 @@ create table UsuarioCargo(
 
 create table Post(
 	Id int primary key,
-	Location int references Location(ID),
+	ImageId int References ImageData(Id),
 	Conteudo varchar(255) not null,
 	DataPublicacao date not null,
 	IdUsuario int not null,
@@ -105,6 +99,7 @@ create table Comentario(
 	IdPost int not null,
 	foreign key(IdPost) references Post(Id),
 )
+
 
 select * from Usuario
 drop table Usuario 

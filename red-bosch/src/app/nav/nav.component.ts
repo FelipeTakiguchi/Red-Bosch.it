@@ -20,7 +20,7 @@ export class NavComponent implements OnInit, OnDestroy {
       let isNavEnd = val instanceof NavigationEnd;
       if (!isNavEnd)
         return;
-      
+        
       if (location.pathname == "/")
         this.selected = 1;
       else if (location.pathname == "/forumPage")

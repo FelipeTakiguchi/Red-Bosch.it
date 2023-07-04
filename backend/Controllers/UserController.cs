@@ -28,13 +28,14 @@ public class UserController : ControllerBase
     [HttpPost("/register")]
     public async Task<ActionResult> Register(
         [FromServices] IUserRepository userRep,
-        [FromServices] ILocationRepository lcr,
+        [FromServices] IRepository<ImageDatum> repo,
         [FromServices] IPasswordHasher psh,
-        [FromServices] ILocationRepository imgr)
+        [FromServices] IImageRepository imgr)
     {
         var files = Request.Form.Files;
-    
-        if(files.Count > 0){
+
+        if (files.Count > 0)
+        {
             var file = Request.Form.Files[0];
             using MemoryStream ms = new MemoryStream();
             await file.CopyToAsync(ms);
@@ -42,7 +43,7 @@ public class UserController : ControllerBase
 
             var img = new ImageDatum();
             img.Photo = data;
-            await lcr.Add(img);
+            await repo.Add(img);
         }
         Console.WriteLine(Request.Form["nome"]);
         Console.WriteLine(Request.Form["email"]);
@@ -57,17 +58,18 @@ public class UserController : ControllerBase
 
         (hashPassword, salt) = psh.GetHashAndSalt(Request.Form["senha"]);
 
+        Console.WriteLine(Request.Form["dataNascimento"]);
+
         Usuario u = new Usuario()
         {
             Nome = Request.Form["nome"],
             Email = Request.Form["email"],
+            DataNascimento = DateTime.Parse(Request.Form["dataNascimento"]),
             Senha = hashPassword,
             Salt = salt,
-            Location = null,
-            
         };
 
-        // u.Location = await imgr.GetLastIndex();
+        u.ImageId = await imgr.GetLastIndex();
 
         await userRep.Add(u);
 
@@ -134,22 +136,20 @@ public class UserController : ControllerBase
         [FromBody] JwtDTO jwt
     )
     {
-        Console.WriteLine(jwt);
         try
         {
-            Console.WriteLine(jwt);
             var result = jwtService.Validate<UserJwt>(jwt.Jwt);
+            Console.WriteLine(result.UserID);
             var query = await userRepository.Filter(u => u.Id == result.UserID);
 
-            Console.WriteLine(query[0].Nome);
-            Console.WriteLine(result);
-
+            Console.WriteLine(query[0]);
             Usuario u = new Usuario()
             {
                 Nome = query[0].Nome,
                 Email = query[0].Email,
-                Location = query[0].Location,
+                Descricao = query[0].Descricao,
                 DataNascimento = query[0].DataNascimento,
+                ImageId = query[0].ImageId
             };
 
             return u;
@@ -159,4 +159,47 @@ public class UserController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+    [HttpPost("/update")]
+    public async Task<ActionResult> Update(
+        [FromServices] IUserRepository userRep,
+        [FromServices] IRepository<ImageDatum> repo,
+        [FromServices] IPasswordHasher psh,
+        [FromServices] IImageRepository imgr,
+        [FromServices] JwtService jwtService,
+        [FromServices] UserRepository userRepository,
+        [FromBody] UserSignup userSignup)
+    {
+        Usuario usuario;
+
+        var token = jwtService.Validate<UserToken>(userSignup.Jwt);
+
+        if (!token.Autenticado)
+            throw new InvalidDataException();
+
+        usuario = await userRepository.Find(token.IdUsuario);
+
+        var files = Request.Form.Files;
+
+        if (files.Count > 0)
+        {
+            var file = Request.Form.Files[0];
+            using MemoryStream ms = new MemoryStream();
+            await file.CopyToAsync(ms);
+            var data = ms.GetBuffer();
+
+            var img = new ImageDatum();
+            img.Photo = data;
+            await repo.Add(img);
+        }
+
+        usuario.Nome = Request.Form["nome"];
+        usuario.Descricao = Request.Form["descricao"];
+
+        usuario.ImageId = await imgr.GetLastIndex();
+
+        await userRep.Update(usuario);
+
+        return Ok();
+    }
+
 }

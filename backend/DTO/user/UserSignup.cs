@@ -8,4 +8,5 @@ public class UserSignup
     public DateTime DataNascimento { get; set;}
     public string FotoNome { get; set; }
     public IFormFile Foto {get; set;}
+    public string Jwt { get; set; }
 }

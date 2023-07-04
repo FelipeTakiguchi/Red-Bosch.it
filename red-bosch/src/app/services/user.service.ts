@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RegisterDTO } from 'src/DTO/RegisterDTO';
 import { LoginDTO } from 'src/DTO/LoginDTO';
 import { UserToken } from 'src/DTO/Token';
 import { Jwt } from 'src/DTO/Jwt';
