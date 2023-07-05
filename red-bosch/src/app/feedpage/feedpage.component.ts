@@ -14,6 +14,7 @@ export class FeedPageComponent implements OnInit {
   @Input() Idade: number | undefined;
   @Input() Imagem: File | undefined;
   @Input() url: string | undefined;
+  @Input() isLogged: boolean = false;
 
   text = "Altere aqui..."
   savedText = ""
@@ -25,8 +26,12 @@ export class FeedPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem("jwtSession") != null)
+    if (sessionStorage.getItem("jwtSession") != null){
       this.jwt.jwt = sessionStorage.getItem("jwtSession")!
+      this.isLogged = true;
+    }
+    else
+      this.isLogged = false;
 
     this.userService.getUser(this.jwt)
       .subscribe(res => {

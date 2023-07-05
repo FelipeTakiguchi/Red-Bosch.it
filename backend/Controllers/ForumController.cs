@@ -44,7 +44,7 @@ public class ForumController : ControllerBase
             img.Photo = data;
             await repo.Add(img);
         }
-        Console.WriteLine(Request.Form["idUsuario"]);
+        
         var result = jwtService.Validate<UserJwt>(Request.Form["idUsuario"]);
 
         Forum forum = new Forum()
@@ -59,5 +59,33 @@ public class ForumController : ControllerBase
         await forumRepository.Add(forum);
 
         return Ok();
+    }
+
+    [HttpGet("{code}")]
+    public async Task<ActionResult<Forum>> GetForum(
+        [FromServices] IForumRepository forumRepository,
+        string code )
+    {
+        try
+        {
+            var query = await forumRepository.Filter(f => f.Id == Convert.ToInt16(code));
+
+            Console.WriteLine(query[0]);
+
+            Forum f = new Forum()
+            {
+                Titulo = query[0].Titulo,
+                Descricao = query[0].Descricao,
+                Inscritos = query[0].Inscritos,
+                ImageId = query[0].ImageId,
+                IdUsuario = query[0].IdUsuario,
+            };
+
+            return f;
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

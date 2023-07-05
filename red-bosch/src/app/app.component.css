@@ -5,12 +5,13 @@ header {
 
 header {
     display: flex;
+    align-items: center;
     justify-content: center;
     min-height: 10vh;
 }
 
 header > a > img {
-    width: 90px !important;
+    width: 120px !important;
 }
 
 nav{

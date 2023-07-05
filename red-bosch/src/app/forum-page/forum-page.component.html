@@ -1,7 +1,10 @@
 <div class="main">
     <app-profile-card [nome]="Nome" [url]="url"></app-profile-card>
-    <div class="cards" *ngFor="let forum of forums">
-        <app-forum-card-page [title]="forum.titulo" [description]="forum.descricao" [userName]="'ninguem'"></app-forum-card-page>
+    <div class="posts">
+        <div class="cards" *ngFor="let forum of forums">
+            <app-forum-card-page [id]="forum.id" [title]="forum.titulo" [description]="forum.descricao"
+                [userName]="'ninguem'"></app-forum-card-page>
+        </div>
     </div>
     <button routerLink="/createForumPage"><mat-icon fontIcon="+"></mat-icon></button>
 </div>

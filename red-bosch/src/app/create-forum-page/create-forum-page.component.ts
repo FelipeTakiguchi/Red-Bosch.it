@@ -18,26 +18,29 @@ export class CreateForumPageComponent {
   fileToUpload: File | undefined;
   formData = new FormData();
 
-  protected onHandleUpload(event : any) {
+  protected onHandleUpload(event: any) {
     this.formData = event
   }
 
   constructor(private forumService: ForumService, private router: Router) { }
-   
-  CreateForum() {    
-    this.formData.delete('titulo')
-    this.formData.delete('descricao')
-    this.formData.delete('idUsuario')
-    this.formData.append('titulo', this.Nome)
-    this.formData.append('descricao', this.Descricao)
-    this.formData.append('idUsuario', sessionStorage.getItem("jwtSession") ?? '')
-    
-    this.forumService.register(this.formData)
-      .subscribe(res => {
-        var body: any = res.status
-        if (body == 200) {
-          this.router.navigate(["/forumPage"])
-        }
-      })
+
+  CreateForum() {
+    if (this.Nome && this.Descricao && this.formData.get("file") != null) {
+      this.formData.delete('titulo')
+      this.formData.delete('descricao')
+      this.formData.delete('idUsuario')
+      this.formData.append('titulo', this.Nome)
+      this.formData.append('descricao', this.Descricao)
+      this.formData.append('idUsuario', sessionStorage.getItem("jwtSession") ?? '')
+
+      this.forumService.register(this.formData)
+        .subscribe(res => {
+          var body: any = res.status
+          if (body == 200) {
+            this.router.navigate(["/forumPage"])
+          }
+        })
+    } else
+      window.alert("Preencha todos os campos!")
   }
 }

@@ -7,8 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./uploader.component.css'],
 })
 export class UploaderComponent implements OnInit {
-  @Output() public onUploadFinished = new EventEmitter<any>();
-  @Input() public value: FormData = new FormData();
+  @Output() onUploadFinished = new EventEmitter<any>();
+  @Input() value: FormData = new FormData();
+  @Input() size: string = '';
   route = new Router();
   ngOnInit(): void { }
 

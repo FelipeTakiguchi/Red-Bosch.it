@@ -10,10 +10,8 @@ import { LoginDTO } from 'src/DTO/LoginDTO';
 })
 
 export class LoginpageComponent {
-  @Input()
-  Email!: string;
-  @Output()
-  Senha!: string;
+  @Input() Email: string = '';
+  @Output() Senha: string = '';
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -23,20 +21,25 @@ export class LoginpageComponent {
   };
 
   onLogin() {
-    this.userLogin.Email = this.Email;
-    this.userLogin.Senha = this.Senha;
+    console.log(this.Email)
+    if (this.Email != '' && this.Senha != '') {
+      this.userLogin.Email = this.Email;
+      this.userLogin.Senha = this.Senha;
 
-    console.log(this.userLogin)
-    this.userService.login(this.userLogin)
-      .subscribe(res => {
-        console.log(res);
-        var body: any = res.body
-        console.log(body.jwt)
-        if (body.success) {
-          sessionStorage.setItem("jwtSession", body.jwt)
-          this.router.navigate(["/"])
-        }
-      })
+      this.userService.login(this.userLogin)
+        .subscribe(res => {
+          console.log(res);
+          var body: any = res.body
+          console.log(body.jwt)
+          if (body.success) {
+            sessionStorage.setItem("jwtSession", body.jwt)
+            this.router.navigate(["/"])
+          } else
+            window.alert("Credenciais incorretas!")
+        })
+    }
+    else
+      window.alert("Preencha todos os campos!")
   }
 
   protected passwordChanged(event: any) {

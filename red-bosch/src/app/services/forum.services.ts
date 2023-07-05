@@ -1,6 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Jwt } from 'src/DTO/Jwt';
 import { ForumDTO } from 'src/DTO/ForumDTO';
 
 @Injectable({
@@ -18,5 +17,9 @@ export class ForumService {
 
     getAll() {
         return this.http.get<ForumDTO[]>('http://localhost:5022/forums')
+    }
+
+    getForum(id: string) {
+        return this.http.get<ForumDTO>('http://localhost:5022/forums/' + id)
     }
 }

@@ -1,6 +1,6 @@
 .main{
     display: flex;
-    gap: 20vh;
+    margin: 7px 20px;
 }
 
 .cards{

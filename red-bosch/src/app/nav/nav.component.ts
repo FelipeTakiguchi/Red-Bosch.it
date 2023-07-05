@@ -9,8 +9,9 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 export class NavComponent implements OnInit, OnDestroy {
   @Input() selected: number = 0;
+  @Input() isLogged: boolean = false;
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   ngOnDestroy(): void {
   }
@@ -18,9 +19,15 @@ export class NavComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.router.events.subscribe((val) => {
       let isNavEnd = val instanceof NavigationEnd;
+
+      if (sessionStorage.getItem("jwtSession") != null)
+        this.isLogged = true;
+      else
+        this.isLogged = false;
+        
       if (!isNavEnd)
         return;
-        
+
       if (location.pathname == "/")
         this.selected = 1;
       else if (location.pathname == "/forumPage")
@@ -28,5 +35,10 @@ export class NavComponent implements OnInit, OnDestroy {
       else if (location.pathname == "/login")
         this.selected = 3;
     })
+  }
+
+  LogOff() {
+    sessionStorage.removeItem("jwtSession");
+    this.router.navigate(["/login"]);
   }
 }

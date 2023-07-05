@@ -14,6 +14,7 @@ export class ForumPageComponent {
   forums: ForumDTO[] = [];
   @Input() Nome: string | undefined;
   @Input() url: string | undefined;
+  @Input() isLogged: boolean = false;
 
   constructor(private userService: UserService, private forumService: ForumService) { }
 
@@ -22,8 +23,12 @@ export class ForumPageComponent {
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem("jwtSession") != null)
+    if (sessionStorage.getItem("jwtSession") != null){
       this.jwt.jwt = sessionStorage.getItem("jwtSession")!
+      this.isLogged = true;
+    }
+    else
+      this.isLogged = false;
 
     this.userService.getUser(this.jwt)
       .subscribe(res => {
@@ -40,6 +45,7 @@ export class ForumPageComponent {
         var newList: ForumDTO[] = []
         list.forEach(forum => {
           newList.push({
+            id: forum.id,
             titulo: forum.titulo,
             descricao: forum.descricao,
             IdUsuario: forum.IdUsuario,

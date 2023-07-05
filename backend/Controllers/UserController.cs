@@ -139,10 +139,8 @@ public class UserController : ControllerBase
         try
         {
             var result = jwtService.Validate<UserJwt>(jwt.Jwt);
-            Console.WriteLine(result.UserID);
             var query = await userRepository.Filter(u => u.Id == result.UserID);
 
-            Console.WriteLine(query[0]);
             Usuario u = new Usuario()
             {
                 Nome = query[0].Nome,

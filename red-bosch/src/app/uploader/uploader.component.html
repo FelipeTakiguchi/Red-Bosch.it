@@ -1,5 +1,5 @@
 <div class="form-floating avatar-input" (click)="file.click()">
-    <img src="{{ getImgSrc() }}" class="image-preview" />
+    <img src="{{ getImgSrc() }}" [ngStyle]="{width: size, height: size}" class="image-preview" />
     <input
         style="display: none"
         class="form-control"

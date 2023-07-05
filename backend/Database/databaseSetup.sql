@@ -21,6 +21,7 @@ create table Usuario(
 	Id int primary key identity,
 	Email varchar(100) not null,
 	Nome varchar(50) not null,
+	Descricao varchar(255) null,
 	Senha varbinary(150) not null,
 	Salt varchar(30) not null,
 	Data_Nascimento Date not null,
@@ -28,7 +29,7 @@ create table Usuario(
 )
 
 create table Forum(
-	Id int primary key,
+	Id int primary key identity,
 	Titulo varchar(50) not null,
 	Descricao varchar(255) not null,
 	Inscritos int not null,

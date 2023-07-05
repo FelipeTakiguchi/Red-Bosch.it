@@ -1,0 +1,27 @@
+<div class="main">
+    <div class="forum-header">
+        <div class="background">
+            <img src="{{forum.imageId}}" alt="">
+        </div>
+        <div class="description">
+            <h1>{{forum.titulo}}</h1>
+            <h2>{{forum.descricao}}</h2>
+        </div>
+    </div>
+    <div class="forum-body">
+        <div class="new-post">
+            <div class="content">
+                <app-uploader class="uploader" [size]="'130px'"></app-uploader>
+                <mat-form-field class="text-area">
+                    <mat-label>Content</mat-label>
+                    <textarea [(ngModel)]="ContentPost" matInput placeholder="I'm feeling..." value={{Content}}></textarea>
+                </mat-form-field>
+            </div>
+            <button class="confirm-button" mat-raised-button color="primary" (click)="CreatePost()">Confirm</button>
+        </div>
+        <div class="cards" *ngFor="let post of posts">
+            <app-forum-card [id]="post.id" [conteudo]="post.conteudo" [dataPublicacao]="post.dataPublicacao"
+            [idUsuario]="post.idUsuario"></app-forum-card>
+        </div>
+    </div>
+</div>

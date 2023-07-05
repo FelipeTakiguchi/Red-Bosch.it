@@ -30,6 +30,7 @@ import { CustomProfileImgComponent } from './custom-profile-img/custom-profile-i
 import { UploaderComponent } from './uploader/uploader.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ForumPageDetailsComponent } from './forum-page-details/forum-page-details.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     CustomInputComponent,
     CustomProfileImgComponent,
     UploaderComponent,
+    ForumPageDetailsComponent,
   ],
   imports: [
     BrowserModule,
