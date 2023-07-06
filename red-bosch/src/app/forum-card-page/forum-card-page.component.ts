@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ForumService } from '../services/forum.services';
+import { ForumDTO } from 'src/DTO/ForumDTO';
 
 @Component({
   selector: 'app-forum-card-page',
@@ -11,10 +13,25 @@ export class ForumCardPageComponent {
   @Input() title: string = '';
   @Input() description: string = '';
   @Input() userName: string = '';
+  @Input() image: string = '';
+  @Input() inscritos: number = 0;
+  formData = new FormData();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private forumService: ForumService) { }
 
-  getForum(){
+  getForum() {
+    this.formData.delete('idUsuario')
+    this.formData.delete('idForum')
+    this.formData.append('idUsuario', sessionStorage.getItem("jwtSession") ?? '')
+    this.formData.append('idForum', this.id.toString())
+
+    this.forumService.addUserForum(this.formData)
+      .subscribe(res => {
+        var body: any = res.status
+        if (body == 200) {
+          this.router.navigate(["/forumPage/" + this.id])
+        }
+      });
     this.router.navigate(["/forumPage/" + this.id.toString()])
   }
 }

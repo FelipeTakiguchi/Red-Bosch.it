@@ -43,8 +43,12 @@ public class ForumRepository : IForumRepository
         await ctx.SaveChangesAsync();
     }
 
-    Task<int> IForumRepository.GetLastIndex()
+    async Task<int> IForumRepository.GetLastIndex()
     {
-        throw new NotImplementedException();
+        var forum = await ctx.Forums.OrderBy(forum =>forum.Id).LastOrDefaultAsync();
+        if(forum != null)
+            return forum.Id;
+
+        return 0; 
     }
 }

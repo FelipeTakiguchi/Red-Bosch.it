@@ -19,6 +19,7 @@
     flex-direction: column;
     margin: 7px 20px;
     width: 100%;
+    gap: 20px;
 }
 
 .header{
@@ -26,6 +27,11 @@
     align-items: center;
 }
 
-.header p{
-    margin-left: 10px;
+.header{
+    gap: 10px;
+}
+
+.description{
+    font-size: 24px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

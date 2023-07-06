@@ -2,10 +2,10 @@
     <div class="content">
         <div class="info">
             <div class="header">
+                <app-custom-profile-img [url]="image" [size]="'50px'"></app-custom-profile-img>
                 <h1 class="tittle">r/{{title}}</h1>
-                <p>x Membros</p>
+                <p>{{inscritos}} Membros</p>
             </div>
-            <h2 class="tag">tag</h2>
             <p class="description">{{description}}</p>
             <button (click)="getForum()" mat-raised-button color="primary">Enter</button>
         </div>

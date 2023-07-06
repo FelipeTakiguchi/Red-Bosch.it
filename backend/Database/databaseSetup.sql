@@ -39,7 +39,7 @@ create table Forum(
 )
 
 create table UsuarioForum(
-	Id int primary key,
+	Id int primary key identity,
 	IdUsuario int not null,
 	foreign key(IdUsuario) references Usuario(Id),
 	IdForum int not null,
@@ -47,13 +47,13 @@ create table UsuarioForum(
 )
 
 create table Permissao(
-	Id int primary key,
+	Id int primary key identity,
 	Nome varchar(50) not null,
 	Descricao varchar(255),
 )
 
 create table Cargo(
-	Id int primary key,
+	Id int primary key identity,
 	Nome varchar(50) not null,
 	IdPermissao int not null,
 	foreign key(IdPermissao) references Permissao(Id),
@@ -62,7 +62,7 @@ create table Cargo(
 )
 
 create table UsuarioCargo(
-	Id int primary key,
+	Id int primary key identity,
 	IdCargo int not null,
 	foreign key(IdCargo) references Cargo(Id),
 	IdUsuario int not null,
@@ -72,9 +72,9 @@ create table UsuarioCargo(
 )
 
 create table Post(
-	Id int primary key,
+	Id int primary key identity,
 	ImageId int References ImageData(Id),
-	Conteudo varchar(255) not null,
+	Conteudo varchar(255) not null,                                        
 	DataPublicacao date not null,
 	IdUsuario int not null,
 	foreign key(IdUsuario) references Usuario(Id),
@@ -83,7 +83,7 @@ create table Post(
 )
 
 create table Vote(
-	Id int primary key,
+	Id int primary key identity,
 	State BIT not null,
 	IdUsuario int not null,
 	IdPost int not null,
@@ -92,7 +92,7 @@ create table Vote(
 )
 
 create table Comentario(
-	Id int primary key,
+	Id int primary key identity,
 	Conteudo varchar(255) not null,
 	DataPublicacao date not null,
 	IdUsuario int not null,

@@ -4,4 +4,5 @@ export interface ForumDTO {
     descricao: string;
     IdUsuario: number;
     imageId: string;
+    inscritos: number;
 }

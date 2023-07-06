@@ -13,6 +13,7 @@ export class ForumCardComponent implements OnInit{
   @Input() idUsuario: string = '';
   @Input() imageUsuario: string = '';
   @Input() nomeUsuario: string = '';
+  @Input() imagemId: number = 0;
   @Input() isLogged: boolean = false;
 
   protected Upvoted = false;
@@ -31,6 +32,8 @@ export class ForumCardComponent implements OnInit{
     }
     else
       this.isLogged = false;
+      
+    this.jwt.jwt = this.idUsuario;
     this.userService.getUser(this.jwt)
       .subscribe(res => {
         console.log(res.body);

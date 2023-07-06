@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Jwt } from 'src/DTO/Jwt';
+import { PostDTO } from 'src/DTO/PostDTO';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-forum',
@@ -15,11 +17,12 @@ export class FeedPageComponent implements OnInit {
   @Input() Imagem: File | undefined;
   @Input() url: string | undefined;
   @Input() isLogged: boolean = false;
+  posts: PostDTO[] = []
 
   text = "Altere aqui..."
   savedText = ""
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private postService: PostService) { }
 
   jwt: Jwt = {
     jwt: '',
@@ -44,6 +47,26 @@ export class FeedPageComponent implements OnInit {
           if(res.body?.imageId.toString() != undefined)
             this.url = "http://localhost:5022/img/" + (res.body?.imageId.toString())
         }
+      })
+
+      this.postService.getAll()
+      .subscribe(list => {
+        console.log(list)
+        var newList: PostDTO[] = []
+        list.forEach(post => {
+          newList.push({
+            id: post.id,
+            conteudo: post.conteudo,
+            dataPublicacao: post.dataPublicacao,
+            imageId: post.imageId,
+            idForum: post.idForum,
+            jwt: post.jwt
+          })
+          
+          console.log(newList);
+        });
+
+        this.posts = newList
       })
   }
 

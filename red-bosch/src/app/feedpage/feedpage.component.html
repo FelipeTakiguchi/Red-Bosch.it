@@ -1,10 +1,9 @@
 <div class="main">
   <app-profile-card *ngIf="isLogged" [nome]="Nome" [url]="url"></app-profile-card>
   <div class="cards">
-    <app-forum-card></app-forum-card>
-    <app-forum-card></app-forum-card>
-    <app-forum-card></app-forum-card>
-    <app-forum-card></app-forum-card>
-    <app-forum-card></app-forum-card>
+    <div class="cards" *ngFor="let post of posts">
+        <app-forum-card [id]="post.id" [conteudo]="post.conteudo" [dataPublicacao]="post.dataPublicacao"
+        [idUsuario]="post.jwt" [imagemId]="post.imageId" ></app-forum-card>
+    </div>
   </div>
 </div>

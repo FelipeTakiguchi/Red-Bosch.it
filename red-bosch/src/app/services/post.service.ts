@@ -18,4 +18,8 @@ export class PostService {
     getPosts(forumId: string) {
         return this.http.get<PostDTO[]>('http://localhost:5022/posts/' + forumId)
     }
+    
+    getAll() {
+        return this.http.get<PostDTO[]>('http://localhost:5022/posts')
+    }
 }

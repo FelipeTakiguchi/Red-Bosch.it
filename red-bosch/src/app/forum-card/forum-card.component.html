@@ -1,6 +1,6 @@
 <div class="forum-card">
     <div class="content">
-        <div class="vote">
+        <div class="vote" *ngIf="isLogged">
             <button (click)="changeUpvote()">
                 <i id="upvote" [ngStyle]="{'color': Upvoted? 'green' : 'white'}" class="fas fa-arrow-up upvote"></i>
             </button>
@@ -10,15 +10,15 @@
                     class="fas fa-arrow-down downvote"></i>
             </button>
         </div>
-        <div class="vl"></div>
+        <div class="vl" *ngIf="isLogged"></div>
         <div class="main">
             <div class="info">
                 <app-custom-profile-img [size]="'35px'" [url]="imageUsuario"></app-custom-profile-img>
                 <p class="pub">Published by: {{nomeUsuario}}</p>
             </div>
             <br>
-            <h1 class="tittle">Tópic</h1>
-            <p>{{conteudo}}</p>
+            <p class="post-content">{{conteudo}}</p>
+            <img class="post-image" *ngIf="imagemId != null" src="http://localhost:5022/img/{{imagemId}}" alt="Imagem do post">
         </div>
     </div>
 </div>

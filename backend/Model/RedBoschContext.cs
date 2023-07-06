@@ -43,7 +43,7 @@ public partial class RedBoschContext : DbContext
     {
         modelBuilder.Entity<Cargo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cargo__3214EC0762D091E5");
+            entity.HasKey(e => e.Id).HasName("PK__Cargo__3214EC07C48D99BD");
 
             entity.ToTable("Cargo");
 
@@ -65,7 +65,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Comentario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comentar__3214EC07B0C8E600");
+            entity.HasKey(e => e.Id).HasName("PK__Comentar__3214EC0781FA118F");
 
             entity.ToTable("Comentario");
 
@@ -88,7 +88,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Forum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Forum__3214EC0757389BEC");
+            entity.HasKey(e => e.Id).HasName("PK__Forum__3214EC07ED45EBBF");
 
             entity.ToTable("Forum");
 
@@ -113,7 +113,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<ImageDatum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ImageDat__3214EC275CD800FE");
+            entity.HasKey(e => e.Id).HasName("PK__ImageDat__3214EC27DE4A7EFB");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Photo).IsRequired();
@@ -121,7 +121,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Permissao>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Permissa__3214EC07C8541AAE");
+            entity.HasKey(e => e.Id).HasName("PK__Permissa__3214EC076EAEBF4D");
 
             entity.ToTable("Permissao");
 
@@ -136,7 +136,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC07456BD3B8");
+            entity.HasKey(e => e.Id).HasName("PK__Post__3214EC076769C12B");
 
             entity.ToTable("Post");
 
@@ -163,7 +163,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC07D202917E");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC074C25D673");
 
             entity.ToTable("Usuario");
 
@@ -196,7 +196,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<UsuarioCargo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UsuarioC__3214EC077F8516F4");
+            entity.HasKey(e => e.Id).HasName("PK__UsuarioC__3214EC072B5B875B");
 
             entity.ToTable("UsuarioCargo");
 
@@ -218,7 +218,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<UsuarioForum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UsuarioF__3214EC07DED0DB47");
+            entity.HasKey(e => e.Id).HasName("PK__UsuarioF__3214EC07ACA88D33");
 
             entity.ToTable("UsuarioForum");
 
@@ -235,7 +235,7 @@ public partial class RedBoschContext : DbContext
 
         modelBuilder.Entity<Vote>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Vote__3214EC07B9969C82");
+            entity.HasKey(e => e.Id).HasName("PK__Vote__3214EC075ECC36D5");
 
             entity.ToTable("Vote");
 

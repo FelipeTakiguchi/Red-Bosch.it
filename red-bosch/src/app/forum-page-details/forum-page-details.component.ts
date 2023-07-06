@@ -12,14 +12,16 @@ import { ForumService } from '../services/forum.services';
 })
 export class ForumPageDetailsComponent {
   posts: PostDTO[] = []
-  forum: ForumDTO = { id: 0, titulo: '', descricao: '', IdUsuario: 0, imageId: '' };
+  forum: ForumDTO = { id: 0, titulo: '', descricao: '', IdUsuario: 0, imageId: '', inscritos: 0 };
   @Input() Nome: string | undefined;
   @Input() url: string | undefined;
   @Input() Content: string = '';
   @Input() ContentPost: string = '';
   formData = new FormData();
   id: string = '';
+
   protected onHandleUpload(event: any) {
+    console.log("Uploadei")
     this.formData = event
   }
 
@@ -36,6 +38,7 @@ export class ForumPageDetailsComponent {
           titulo: forum.titulo,
           descricao: forum.descricao,
           IdUsuario: forum.IdUsuario,
+          inscritos: forum.inscritos,
           imageId: "http://localhost:5022/img/" + forum.imageId,
         };
       });
@@ -50,7 +53,7 @@ export class ForumPageDetailsComponent {
             dataPublicacao: post.dataPublicacao,
             imageId: post.imageId,
             idForum: post.idForum,
-            idUsuario: post.idUsuario
+            jwt: post.jwt
           })
           
           console.log(newList);

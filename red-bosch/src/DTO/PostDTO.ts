@@ -1,8 +1,8 @@
 export interface PostDTO {
     id: number;
-    imageId: string;
+    imageId: number;
     conteudo: string;
     dataPublicacao: Date;
-    idUsuario: string,
     idForum: string,
+    jwt: string,
 }

@@ -12,7 +12,6 @@ using Security.Jwt;
 
 [ApiController]
 [EnableCors("MainPolicy")]
-[Route("posts")]
 public class PostController : ControllerBase
 {
     [HttpPost("/addPost")]
@@ -23,7 +22,7 @@ public class PostController : ControllerBase
         [FromServices] IJwtService jwtService)
     {
         var files = Request.Form.Files;
-
+        
         if (files.Count > 0)
         {
             var file = Request.Form.Files[0];
@@ -42,7 +41,7 @@ public class PostController : ControllerBase
         {
             Conteudo = Request.Form["content"],
             DataPublicacao = DateTime.Parse(Request.Form["date"]),
-            IdUsuario =  result.UserID,
+            IdUsuario = result.UserID,
             IdForum = Convert.ToInt16(Request.Form["idForum"]),
         };
 
@@ -54,21 +53,75 @@ public class PostController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{code}")]
-    public async Task<ActionResult<List<Post>>> getPosts(
+    [HttpGet("posts/{code}")]
+    public async Task<ActionResult<List<PostDTO>>> GetPosts(
         [FromServices] IPostRepository postRepository,
+        [FromServices] IJwtService jwtService,
         string code
     )
     {
         try
-        {            
-            return await postRepository.Filter(p => p.IdForum == Convert.ToInt16(code));
+        {
+            var post = await postRepository.Filter(p => p.IdForum == Convert.ToInt16(code));
+            List<PostDTO> postDTOs = new();
+
+            for (int i = 0; i < post.Count; i++)
+            {
+                PostDTO postDTO = new()
+                {
+                    Id = post[i].Id,
+                    Conteudo = post[i].Conteudo,
+                    ImageId = post[i].ImageId,
+                    DataPublicacao = post[i].DataPublicacao,
+                    IdUsuario = post[i].IdUsuario,
+                    jwt = jwtService.GetToken<UserJwt>(new UserJwt { UserID = post[i].IdUsuario }),
+                };
+
+                postDTOs.Add(postDTO);
+            }
+
+            return postDTOs;
         }
         catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
+
+    [HttpGet("/posts")]
+    public async Task<ActionResult<List<PostDTO>>> GetAll(
+        [FromServices] IPostRepository postRepository,
+        [FromServices] IJwtService jwtService
+    )
+    {
+        try
+        {
+            var post = await postRepository.Filter(p => true);
+            List<PostDTO> postDTOs = new();
+
+            for (int i = 0; i < post.Count; i++)
+            {
+                PostDTO postDTO = new()
+                {
+                    Id = post[i].Id,
+                    Conteudo = post[i].Conteudo,
+                    ImageId = post[i].ImageId,
+                    DataPublicacao = post[i].DataPublicacao,
+                    IdUsuario = post[i].IdUsuario,
+                    jwt = jwtService.GetToken<UserJwt>(new UserJwt { UserID = post[i].IdUsuario }),
+                };
+
+                postDTOs.Add(postDTO);
+            }
+
+            return postDTOs;
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
     [HttpPost("/updatePost")]
     public async Task<ActionResult> Update(
         [FromServices] IUserRepository userRep,
