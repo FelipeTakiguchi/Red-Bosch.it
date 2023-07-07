@@ -1,9 +1,9 @@
 <p align="center">
-  <img alt="Bosch Logo" src="/red-bosch/src/assets/images/bosch-logo.png" width="100px" />
+  <img alt="Bosch Logo" src="/red-bosch/src/assets/images/bosch-logo.png" width="300px" />
   <h1 align="center">Red-Bosch.it</h1>
 </p>
 
-A social media based on Reddit and Bosch corporation.
+A social media based on Reddit and Bosch corporation. It has some features like create your own account, login, create fórums, share some Posts and more!
 
 ## Index
 - [Index](#index)
