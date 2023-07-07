@@ -1,7 +1,8 @@
 <p align="center">
-  <img alt="rifa" src="https://cdn.shopify.com/s/files/1/0622/5834/8216/products/Bosch-Security_3356a73e-f473-4323-9d0c-d6fe12f13bf6_600x600.jpg?v=1679886187" width="100px" />
+  <img alt="rifa" src="/red-bosch/src/app/assets/images/bosch-logo.png" width="100px" />
   <h1 align="center">Red-Bosch.it</h1>
 </p>
+
 A social media based on Reddit and Bosch corporation.
 
 ## Index
@@ -18,5 +19,6 @@ A social media based on Reddit and Bosch corporation.
 1. Sign In
 2. Log In
 3. Feed Page
-4. Fórum Page
-5. Post Page
+4. Create Fórum Page
+5. Fórum Page
+6. Edit Profile Page
