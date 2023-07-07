@@ -10,12 +10,15 @@ export class UploaderComponent implements OnInit {
   @Output() onUploadFinished = new EventEmitter<any>();
   @Input() value: FormData = new FormData();
   @Input() size: string = '';
+  @Input() foto: string | undefined = "";
+
   route = new Router();
   ngOnInit(): void { }
 
   imgUrl: string = '';
 
   uploadFile = (files: any) => {
+    this.foto = "";
     if (files.length == 0) {
       return;
     }
@@ -25,7 +28,6 @@ export class UploaderComponent implements OnInit {
     this.value = new FormData();
     this.value.append('file', fileToUpload, fileToUpload.name);
     this.imgUrl = URL.createObjectURL(fileToUpload);
-    console.log(this.value)
     this.onUploadFinished.emit(this.value);
   };
 

@@ -19,8 +19,7 @@ export class NewaccountpageComponent {
   @Output() Senha: string = '';
   @Output() ConfirmaSenha: string = '';
   @Output() DataNascimento!: Date;
-  @Input()
-  Foto!: string;
+  @Input() Foto: string = "";
   maxDate: Date = new Date();
   fileToUpload: File | undefined;
   formData = new FormData();

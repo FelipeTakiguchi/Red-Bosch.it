@@ -31,6 +31,7 @@ import { UploaderComponent } from './uploader/uploader.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ForumPageDetailsComponent } from './forum-page-details/forum-page-details.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ForumPageDetailsComponent } from './forum-page-details/forum-page-detai
     CustomProfileImgComponent,
     UploaderComponent,
     ForumPageDetailsComponent,
+    ViewProfileComponent,
   ],
   imports: [
     BrowserModule,

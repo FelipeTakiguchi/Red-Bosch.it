@@ -45,31 +45,29 @@ public class UserController : ControllerBase
             img.Photo = data;
             await repo.Add(img);
         }
-        Console.WriteLine(Request.Form["nome"]);
-        Console.WriteLine(Request.Form["email"]);
-        // var query = await userRep.Filter(u => u.Nome == Request.Form["nome"] || u.Email == Request.Form["email"]);
 
-        // if (query.Count() > 0)
-        //     return BadRequest();
+        var query = await userRep.Filter(u => u.Nome == Request.Form["nome"] || u.Email == Request.Form["email"]);
 
+        if (query.Count > 0)
+            return BadRequest();
 
         byte[] hashPassword;
         string salt;
 
         (hashPassword, salt) = psh.GetHashAndSalt(Request.Form["senha"]);
 
-        Console.WriteLine(Request.Form["dataNascimento"]);
-
         Usuario u = new Usuario()
         {
             Nome = Request.Form["nome"],
             Email = Request.Form["email"],
+            Descricao = "Hey There! I'm a new Red Bosch.it User",
             DataNascimento = DateTime.Parse(Request.Form["dataNascimento"]),
             Senha = hashPassword,
             Salt = salt,
         };
 
-        u.ImageId = await imgr.GetLastIndex();
+        if (files.Count > 0)
+            u.ImageId = await imgr.GetLastIndex();
 
         await userRep.Add(u);
 
@@ -130,7 +128,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("/getUser")]
-    public async Task<ActionResult<Usuario>> getUser(
+    public async Task<ActionResult<Usuario>> GetUser(
         [FromServices] IJwtService jwtService,
         [FromServices] IUserRepository userRepository,
         [FromBody] JwtDTO jwt
@@ -157,25 +155,45 @@ public class UserController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpGet("/getUserByName/{nome}")]
+    public async Task<ActionResult<Usuario>> GetUserByName(
+        [FromServices] IUserRepository userRepository,
+        string nome
+    )
+    {
+        try
+        {
+            Console.WriteLine(nome);
+            var query = await userRepository.Filter(u => u.Nome == nome);
+
+            Usuario u = new Usuario()
+            {
+                Nome = query[0].Nome,
+                Email = query[0].Email,
+                Descricao = query[0].Descricao,
+                DataNascimento = query[0].DataNascimento,
+                ImageId = query[0].ImageId
+            };
+
+            return u;
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
     [HttpPost("/update")]
     public async Task<ActionResult> Update(
         [FromServices] IUserRepository userRep,
         [FromServices] IRepository<ImageDatum> repo,
-        [FromServices] IPasswordHasher psh,
         [FromServices] IImageRepository imgr,
-        [FromServices] JwtService jwtService,
-        [FromServices] UserRepository userRepository,
-        [FromBody] UserSignup userSignup)
+        [FromServices] IJwtService jwtService)
     {
-        Usuario usuario;
-
-        var token = jwtService.Validate<UserToken>(userSignup.Jwt);
-
-        if (!token.Autenticado)
-            throw new InvalidDataException();
-
-        usuario = await userRepository.Find(token.IdUsuario);
-
+        var jwt = Request.Form["idUser"];
+        var result = jwtService.Validate<UserJwt>(jwt);
+        var usuario = await userRep.Filter(u => u.Id == result.UserID);
         var files = Request.Form.Files;
 
         if (files.Count > 0)
@@ -190,12 +208,13 @@ public class UserController : ControllerBase
             await repo.Add(img);
         }
 
-        usuario.Nome = Request.Form["nome"];
-        usuario.Descricao = Request.Form["descricao"];
+        usuario[0].Nome = Request.Form["nome"];
+        usuario[0].Descricao = Request.Form["descricao"];
 
-        usuario.ImageId = await imgr.GetLastIndex();
+        if (files.Count > 0)
+            usuario[0].ImageId = await imgr.GetLastIndex();
 
-        await userRep.Update(usuario);
+        await userRep.Update(usuario[0]);
 
         return Ok();
     }

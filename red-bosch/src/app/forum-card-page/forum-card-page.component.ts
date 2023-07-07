@@ -15,6 +15,7 @@ export class ForumCardPageComponent {
   @Input() userName: string = '';
   @Input() image: string = '';
   @Input() inscritos: number = 0;
+  @Input() enter: boolean = false;
   formData = new FormData();
 
   constructor(private router: Router, private forumService: ForumService) { }
@@ -32,6 +33,10 @@ export class ForumCardPageComponent {
           this.router.navigate(["/forumPage/" + this.id])
         }
       });
+    this.router.navigate(["/forumPage/" + this.id.toString()])
+  }
+  
+  enterForum() {
     this.router.navigate(["/forumPage/" + this.id.toString()])
   }
 }

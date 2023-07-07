@@ -12,7 +12,18 @@ header {
 
 header > a > img {
     width: 120px !important;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
+.float-top{
+    position: absolute;
+    right: 1vw;
+    height: 50px;
+    height: 50px;
+}
+
 
 nav{
     min-height: 5vh;

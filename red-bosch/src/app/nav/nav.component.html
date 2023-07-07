@@ -1,15 +1,8 @@
-
 <nav mat-tab-nav-bar>
     <a mat-tab-link routerLink="/" [active]="selected == 1">
         Feed
     </a>
     <a *ngIf="isLogged" mat-tab-link routerLink="/forumPage" [active]="selected == 2">
         Fórums
-    </a>
-    <a *ngIf="isLogged" matTabLink (click)="LogOff()" [active]="selected == 3">
-        LogOff
-    </a>
-    <a *ngIf="!isLogged" matTabLink routerLink="/login" [active]="selected == 3">
-        Login
     </a>
 </nav>

@@ -1,10 +1,22 @@
+<div class="center">
+    <h1 class="tittle-forums">Fórums Disponíveis: </h1>
+    <div class="options">
+        <div class="all" (click)="showAll()" [ngClass]="{ 'clicked': option }">
+            All
+        </div>
+        <div class="vertical"></div>
+        <div class="joined" (click)="showJoined()"[ngClass]="{ 'clicked': !option }">
+            Joined
+        </div>
+    </div>
+</div>
 <div class="main">
-    <app-profile-card [nome]="Nome" [url]="url"></app-profile-card>
+    <app-profile-card [nome]="Nome" [url]="url" [descricao]="Descricao"></app-profile-card>
     <div class="posts">
         <div class="cards" *ngFor="let forum of forums">
             <app-forum-card-page [id]="forum.id" [title]="forum.titulo" [description]="forum.descricao"
-                [userName]="'ninguem'" [image]="forum.imageId"  [inscritos]="forum.inscritos"></app-forum-card-page>
+                [userName]="'ninguem'" [image]="forum.imageId" [inscritos]="forum.inscritos" [enter]="option"></app-forum-card-page>
         </div>
     </div>
-    <button routerLink="/createForumPage"><mat-icon fontIcon="+"></mat-icon></button>
+    <button routerLink="/createForumPage" *ngIf="!option">+</button>
 </div>

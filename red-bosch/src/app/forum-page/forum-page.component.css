@@ -24,19 +24,21 @@
 
 .main {
     display: flex;
-    flex-direction: column;
-    margin: 7px 20px;
-    gap: 7.5vh;
+    justify-content: center;
 }
 
 button {
     margin-top: 30px;
     background-color: var(--primary-color);
     border: none;
-    box-shadow: gray 1px 1px 1px 1px;
     border-radius: 100%;
     width: 50px;
     height: 50px;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .votes-count {
@@ -61,4 +63,66 @@ button:hover {
 
 mat-icon{
     color: white !important;
+}
+
+.options{
+    display: flex;
+    background-color: var(--primary-color);
+    font-size: 32px;
+    border-radius: 17px;
+    margin: 27px;
+    color: white;
+}
+
+.options *{
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.vertical{
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--gray-100);
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.clicked{
+    color: black;
+    background-color: var(--gray);
+}
+
+.options > *:hover{
+    background-color: var(--primary-color-100);
+}
+
+.all, .joined{
+    padding: 20px;
+}
+
+.all{
+    border-top-left-radius: 17px;
+    border-bottom-left-radius: 17px;
+}
+
+.joined{
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+}
+
+.tittle-forums{
+    background-color: var(--gray);
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    height: 38px;
+    margin: 0px;
+    margin-top: 28px;
+    font-size: 32px;
+    padding: 10px;
 }

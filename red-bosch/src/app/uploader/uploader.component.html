@@ -1,5 +1,6 @@
 <div class="form-floating avatar-input" (click)="file.click()">
-    <img src="{{ getImgSrc() }}" [ngStyle]="{width: size, height: size}" class="image-preview" />
+    <img *ngIf="foto != ''" src="{{ foto }}" [ngStyle]="{width: size, height: size}" class="image-preview" />
+    <img *ngIf="foto == ''" src="{{ getImgSrc() }}" [ngStyle]="{width: size, height: size}" class="image-preview" />
     <input
         style="display: none"
         class="form-control"

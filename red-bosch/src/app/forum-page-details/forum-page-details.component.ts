@@ -21,7 +21,6 @@ export class ForumPageDetailsComponent {
   id: string = '';
 
   protected onHandleUpload(event: any) {
-    console.log("Uploadei")
     this.formData = event
   }
 
@@ -32,7 +31,6 @@ export class ForumPageDetailsComponent {
     
     this.forumService.getForum(this.id)
       .subscribe(forum => {
-        console.log(forum)
         this.forum = {
           id: forum.id,
           titulo: forum.titulo,
@@ -44,7 +42,6 @@ export class ForumPageDetailsComponent {
       });
     this.postService.getPosts(this.id)
       .subscribe(list => {
-        console.log(list)
         var newList: PostDTO[] = []
         list.forEach(post => {
           newList.push({
@@ -55,8 +52,6 @@ export class ForumPageDetailsComponent {
             idForum: post.idForum,
             jwt: post.jwt
           })
-          
-          console.log(newList);
         });
 
         this.posts = newList

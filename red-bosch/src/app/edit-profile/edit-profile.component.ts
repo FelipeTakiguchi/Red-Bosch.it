@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Jwt } from 'src/DTO/Jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -8,15 +9,22 @@ import { Jwt } from 'src/DTO/Jwt';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent {
+  @Output() valueChanged = new EventEmitter<string>();
   @Input() Nome: string | undefined;
   @Input() Imagem: File | undefined;
   @Input() url: string | undefined;
   @Input() Descricao: string | undefined;
+  
+  formData = new FormData();
+
+  protected onHandleUpload(event: any) {
+    this.formData = event
+  }
 
   text = "Altere aqui..."
   savedText = ""
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   jwt: Jwt = {
     jwt: '',
@@ -31,9 +39,29 @@ export class EditProfileComponent {
         if (res.status == 200) {
           this.Nome = res.body?.nome;
           this.Descricao = res.body?.descricao;
-          if(res.body?.imageId.toString() != undefined)
+          if (res.body?.imageId.toString() != undefined)
             this.url = "http://localhost:5022/img/" + (res.body?.imageId.toString())
         }
       })
+  }
+
+  updateUser() {
+    if (this.Nome != undefined && this.Descricao != undefined) {
+      this.formData.delete('idUser')
+      this.formData.delete('nome')
+      this.formData.delete('descricao')
+      this.formData.append('idUser', sessionStorage.getItem('jwtSession') ?? '')
+      this.formData.append('nome', this.Nome)
+      this.formData.append('descricao', this.Descricao)
+
+      this.userService.updateUser(this.formData)
+        .subscribe(res => {
+          var body: any = res.status
+          if (body == 200)
+            this.router.navigate(["/"])
+          else
+            window.alert("Ocorreu um erro ao atualizar seu perfil!")
+        })
+    }
   }
 }

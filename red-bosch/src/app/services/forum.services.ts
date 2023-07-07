@@ -33,4 +33,9 @@ export class ForumService {
         const headers = new HttpHeaders().set('id', id)
         return this.http.get<ForumDTO[]>('http://localhost:5022/getSomeForums', {headers})
     }
+    
+    getJoinedForums(id: string) {
+        const headers = new HttpHeaders().set('id', id)
+        return this.http.get<ForumDTO[]>('http://localhost:5022/getJoinedForums', {headers})
+    }
 }

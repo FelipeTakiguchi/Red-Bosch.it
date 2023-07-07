@@ -1,5 +1,5 @@
 <div class="main">
-  <app-profile-card *ngIf="isLogged" [nome]="Nome" [url]="url"></app-profile-card>
+  <app-profile-card *ngIf="isLogged" [nome]="Nome" [url]="url" [descricao]="Descricao"></app-profile-card>
   <div class="cards">
     <div class="cards" *ngFor="let post of posts">
         <app-forum-card [id]="post.id" [conteudo]="post.conteudo" [dataPublicacao]="post.dataPublicacao"

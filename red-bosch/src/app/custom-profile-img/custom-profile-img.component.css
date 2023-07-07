@@ -11,4 +11,10 @@
     border-radius: 100%;
     cursor: pointer;
     text-align: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    border-color: var(--gray-100);
+    user-select: none;
+    border-width: 5px;
+    border-style:outset;
 }

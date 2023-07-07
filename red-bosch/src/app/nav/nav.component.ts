@@ -36,9 +36,4 @@ export class NavComponent implements OnInit, OnDestroy {
         this.selected = 3;
     })
   }
-
-  LogOff() {
-    sessionStorage.removeItem("jwtSession");
-    this.router.navigate(["/login"]);
-  }
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Jwt } from 'src/DTO/Jwt';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-forum-card',
@@ -8,6 +9,7 @@ import { Jwt } from 'src/DTO/Jwt';
   styleUrls: ['./forum-card.component.css']
 })
 export class ForumCardComponent implements OnInit{  
+  @Input() id: number = 0;
   @Input() conteudo: string = '';
   @Input() dataPublicacao?: Date;
   @Input() idUsuario: string = '';
@@ -19,7 +21,7 @@ export class ForumCardComponent implements OnInit{
   protected Upvoted = false;
   protected Downvoted = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private postService: PostService) { }
 
   jwt: Jwt = {
     jwt: '',
@@ -36,7 +38,6 @@ export class ForumCardComponent implements OnInit{
     this.jwt.jwt = this.idUsuario;
     this.userService.getUser(this.jwt)
       .subscribe(res => {
-        console.log(res.body);
         if (res.status == 200) {
           if(res.body?.nome != undefined)
             this.nomeUsuario = res.body.nome;
@@ -54,5 +55,15 @@ export class ForumCardComponent implements OnInit{
   protected changeUpvote() {
     this.Downvoted = false;
     this.Upvoted = true;
+  }
+
+  deletePost() {
+    this.postService.deletePost(this.id.toString())
+      .subscribe(res => {
+        console.log(res)
+        if(res){
+          window.location.reload()
+        }
+      })
   }
 }

@@ -1,5 +1,7 @@
 <header>
   <a href=""><img src="../assets/images/redbosch-icon.png" id="logo" style="width: 6%;" alt="image redbosch logo"></a>
+  <button mat-button *ngIf="!isLogged" routerLink="/login" class="float-top"><img src="./assets/images/login.png"></button>
+  <button mat-button *ngIf="isLogged" (click)="LogOff()" class="float-top"><img src="./assets/images/logout.png"></button>
 </header>
 <hr>
 <nav>

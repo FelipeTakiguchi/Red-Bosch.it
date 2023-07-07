@@ -8,6 +8,7 @@ import { ForumPageComponent } from './forum-page/forum-page.component';
 import { CreateForumPageComponent } from './create-forum-page/create-forum-page.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ForumPageDetailsComponent } from './forum-page-details/forum-page-details.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
 
 const routes: Routes = [
     { path: "", title: "Feed", component: FeedPageComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: "forumPage", title: "Fórums", component: ForumPageComponent },
     { path: "createForumPage", title: "New Fórum", component: CreateForumPageComponent },
     { path: "editProfile", title: "Edit Profile", component: EditProfileComponent },
+    { path: "profile/:name", title: "Profile", component: ViewProfileComponent },
     { path: "**", title: "Not Found", component: NotFoundPageComponent }
 ];
 @NgModule({

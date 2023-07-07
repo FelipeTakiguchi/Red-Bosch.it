@@ -7,7 +7,8 @@
                 <p>{{inscritos}} Membros</p>
             </div>
             <p class="description">{{description}}</p>
-            <button (click)="getForum()" mat-raised-button color="primary">Enter</button>
+            <button *ngIf="!enter" (click)="getForum()" mat-raised-button color="primary">Join</button>
+            <button *ngIf="enter" (click)="enterForum()" mat-raised-button color="primary">Enter</button>
         </div>
     </div>
 </div>

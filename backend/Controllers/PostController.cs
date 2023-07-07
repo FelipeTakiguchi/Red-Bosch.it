@@ -22,7 +22,7 @@ public class PostController : ControllerBase
         [FromServices] IJwtService jwtService)
     {
         var files = Request.Form.Files;
-        
+
         if (files.Count > 0)
         {
             var file = Request.Form.Files[0];
@@ -80,7 +80,27 @@ public class PostController : ControllerBase
                 postDTOs.Add(postDTO);
             }
 
-            return postDTOs;
+            return postDTOs.OrderByDescending(postDTO => postDTO.Id).ToList();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("/deletePost/{id}")]
+    public async Task<ActionResult<bool>> DeletePost(
+        [FromServices] IPostRepository postRepository,
+        string id
+    )
+    {
+        try
+        {
+            Console.WriteLine(id);
+            var post = await postRepository.Filter(p => p.Id == Convert.ToInt16(id));
+            Console.WriteLine(post[0].Conteudo);
+            var result = postRepository.Delete(post[0]);
+            return Ok(true);
         }
         catch (Exception e)
         {
@@ -114,14 +134,14 @@ public class PostController : ControllerBase
                 postDTOs.Add(postDTO);
             }
 
-            return postDTOs;
+            return postDTOs.OrderByDescending(postDTO => postDTO.Id).ToList();
         }
         catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpPost("/updatePost")]
     public async Task<ActionResult> Update(
         [FromServices] IUserRepository userRep,
@@ -158,7 +178,8 @@ public class PostController : ControllerBase
         usuario.Nome = Request.Form["nome"];
         usuario.Descricao = Request.Form["descricao"];
 
-        usuario.ImageId = await imgr.GetLastIndex();
+        if (files.Count > 0)
+            usuario.ImageId = await imgr.GetLastIndex();
 
         await userRep.Update(usuario);
 

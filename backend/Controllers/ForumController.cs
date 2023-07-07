@@ -131,16 +131,49 @@ public class ForumController : ControllerBase
             }
 
             for (int i = 0; i < query1.Count; i++)
-            {
                 if (query1.Count > 0 && query2.Count > 0)
-                {
                     if (query1[i].IdUsuario == result.UserID)
                     {
                         var removes = query2.Where(x => x.Id == query1[i].IdForum).Select(x => x);
 
-                        List<ForumDTO> forumsToRemove = new();
+                        foreach (var val in removes)
+                            foreach (var item in forumDTO.ToList())
+                                if (item.Id == val.Id)
+                                    forumDTO.Remove(item);
+                    }
 
-                        foreach (var item in removes)
+            return Ok(forumDTO.OrderByDescending(forumDTO => forumDTO.Id));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("/getJoinedForums")]
+    public async Task<ActionResult<List<Forum>>> GetJoinedForums(
+                [FromServices] IForumRepository forumRepository,
+                [FromServices] IJwtService jwtService,
+                [FromServices] IUsuarioForumRepository usuarioForumRepository)
+
+    {
+        try
+        {
+            var jwt = Request.Headers["id"];
+            var result = jwtService.Validate<UserJwt>(jwt);
+
+            var query1 = await usuarioForumRepository.Filter(u => true);
+            var query2 = await forumRepository.Filter(f => true);
+
+            List<ForumDTO> forumDTO = new();
+
+            for (int i = 0; i < query1.Count; i++)
+                if (query1.Count > 0 && query2.Count > 0)
+                    if (query1[i].IdUsuario == result.UserID)
+                    {
+                        var myQuery = query2.Where(x => x.Id == query1[i].IdForum).Select(x => x);
+
+                        foreach (var item in myQuery)
                         {
                             ForumDTO forinho = new()
                             {
@@ -151,23 +184,11 @@ public class ForumController : ControllerBase
                                 ImageId = item.ImageId,
                                 IdUsuario = item.IdUsuario
                             };
-                            Console.WriteLine(forinho.Id);
-                            Console.WriteLine(forinho.Titulo);
-                            Console.WriteLine(forinho.Descricao);
-                            Console.WriteLine(forinho.Inscritos);
-                            Console.WriteLine(forinho.ImageId);
-                            Console.WriteLine(forinho.IdUsuario);
-                            forumsToRemove.Add(forinho);
+                            forumDTO.Add(forinho);
                         }
-                        // forumDTO.Join()
                     }
-                }
-            }
 
-            foreach (var item in forumDTO)
-                Console.WriteLine(item.Descricao);
-
-            return Ok(forumDTO);
+            return Ok(forumDTO.OrderByDescending(forumDTO => forumDTO.Id));
         }
         catch (Exception e)
         {

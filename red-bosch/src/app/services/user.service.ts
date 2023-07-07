@@ -35,4 +35,14 @@ export class UserService {
             observe: 'response',
         })
     }
+    
+    getUserByName(name: string) {
+        return this.http.get<UserDTO>('http://localhost:5022/getUserByName/' + name)
+    }
+    
+    updateUser(formData: FormData) {
+        return this.http.post<UserToken>('http://localhost:5022/update', formData,  { 
+            observe: 'response',
+        })
+    }
 }

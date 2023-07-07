@@ -21,16 +21,13 @@ export class LoginpageComponent {
   };
 
   onLogin() {
-    console.log(this.Email)
     if (this.Email != '' && this.Senha != '') {
       this.userLogin.Email = this.Email;
       this.userLogin.Senha = this.Senha;
 
       this.userService.login(this.userLogin)
         .subscribe(res => {
-          console.log(res);
           var body: any = res.body
-          console.log(body.jwt)
           if (body.success) {
             sessionStorage.setItem("jwtSession", body.jwt)
             this.router.navigate(["/"])

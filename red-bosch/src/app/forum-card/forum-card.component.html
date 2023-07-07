@@ -13,12 +13,17 @@
         <div class="vl" *ngIf="isLogged"></div>
         <div class="main">
             <div class="info">
-                <app-custom-profile-img [size]="'35px'" [url]="imageUsuario"></app-custom-profile-img>
+                <app-custom-profile-img [size]="'35px'" [url]="imageUsuario"
+                    [Nome]="nomeUsuario"></app-custom-profile-img>
                 <p class="pub">Published by: {{nomeUsuario}}</p>
+                <div class="container-right">
+                    <button class="delete-button"><img src="./assets/images/delete.png" alt="delete button" (click)="deletePost()"></button>
+                </div>
             </div>
             <br>
             <p class="post-content">{{conteudo}}</p>
-            <img class="post-image" *ngIf="imagemId != null" src="http://localhost:5022/img/{{imagemId}}" alt="Imagem do post">
+            <img class="post-image" *ngIf="imagemId != null" src="http://localhost:5022/img/{{imagemId}}"
+                alt="Imagem do post">
         </div>
     </div>
 </div>

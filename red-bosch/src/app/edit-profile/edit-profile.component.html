@@ -2,14 +2,14 @@
     <h1>Edit Profile</h1>
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput value={{Nome}}>
+        <input matInput [(ngModel)]="Nome" value={{Nome}}>
     </mat-form-field>
-    <app-uploader></app-uploader>
+    <app-uploader name="Foto" (onUploadFinished)="onHandleUpload($event)" ngDefaultControl [foto]="url"></app-uploader>
     <div class="content">
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <textarea matInput placeholder="This fórum is..." value={{Descricao}}></textarea>
+            <textarea matInput placeholder="This fórum is..." [(ngModel)]="Descricao" value={{Descricao}}></textarea>
         </mat-form-field>
-        <button mat-raised-button color="primary" routerLink="/editProfile">Confirm</button>
+        <button mat-raised-button color="primary" (click)="updateUser()">Confirm</button>
     </div>
 </div>
