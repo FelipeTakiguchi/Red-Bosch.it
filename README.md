@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="rifa" src="/red-bosch/src/app/assets/images/bosch-logo.png" width="100px" />
+  <img alt="Bosch Logo" src="/red-bosch/src/assets/images/bosch-logo.png" width="100px" />
   <h1 align="center">Red-Bosch.it</h1>
 </p>
 
@@ -10,7 +10,7 @@ A social media based on Reddit and Bosch corporation.
 - [DataBase Model](#link-to-database-model)
 - [Pages](#pages)
 
-## Link to Database Model
+## Link to Database Model 
 ---
 [Database Model - LucidChart](https://lucid.app/lucidchart/d0fb0e30-aecc-4a1a-b3cb-48d831e11f75/edit?viewport_loc=-499%2C-257%2C2032%2C1015%2C0_0&invitationId=inv_71db7f26-0ead-49bc-8e6a-5777fa7711dc)
 ---
