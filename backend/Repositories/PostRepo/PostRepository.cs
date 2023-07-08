@@ -23,7 +23,8 @@ public class PostRepository : IPostRepository
 
     public async Task Delete(Post obj)
     {
-        ctx.Posts.Remove(obj);
+        var result = ctx.Posts.Remove(obj);
+        Console.WriteLine(result);
         await ctx.SaveChangesAsync();
     }
 

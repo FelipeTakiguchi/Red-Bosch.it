@@ -11,6 +11,7 @@ public partial class PostDTO
     public DateTime DataPublicacao { get; set; }
 
     public int IdUsuario { get; set; }
+    public int IdForum { get; set; }
 
     public string jwt { get; set; }
 }

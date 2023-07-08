@@ -30,7 +30,7 @@ footer{
     font-weight: bolder;
     font-size: x-large;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
 }
 

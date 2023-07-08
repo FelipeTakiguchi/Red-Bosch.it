@@ -74,9 +74,9 @@ public class PostController : ControllerBase
                     ImageId = post[i].ImageId,
                     DataPublicacao = post[i].DataPublicacao,
                     IdUsuario = post[i].IdUsuario,
+                    IdForum = post[i].IdForum,
                     jwt = jwtService.GetToken<UserJwt>(new UserJwt { UserID = post[i].IdUsuario }),
                 };
-
                 postDTOs.Add(postDTO);
             }
 
@@ -88,19 +88,31 @@ public class PostController : ControllerBase
         }
     }
 
-    [HttpGet("/deletePost/{id}")]
-    public async Task<ActionResult<bool>> DeletePost(
+    [HttpPost("/deletePost")]
+    public async Task<ActionResult<Post>> DeletePost(
         [FromServices] IPostRepository postRepository,
-        string id
+        [FromServices] IVoteRepository voteRepository
     )
     {
         try
         {
-            Console.WriteLine(id);
-            var post = await postRepository.Filter(p => p.Id == Convert.ToInt16(id));
-            Console.WriteLine(post[0].Conteudo);
-            var result = postRepository.Delete(post[0]);
-            return Ok(true);
+            Console.WriteLine(Request.Form["idPost"]);
+
+            var post = await postRepository.Filter(p => p.Id == Convert.ToInt16(Request.Form["idPost"]));
+            var votes = await voteRepository.Filter(v => v.IdPost == Convert.ToInt16(Request.Form["idPost"]));
+
+            if (votes.Any())
+                foreach (var vote in votes)
+                {
+                    await voteRepository.Delete(vote);
+                }
+                
+            if (post.Any())
+                await postRepository.Delete(post[0]);
+            else
+                return NotFound();
+
+            return post[0];
         }
         catch (Exception e)
         {

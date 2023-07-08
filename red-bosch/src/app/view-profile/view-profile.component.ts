@@ -25,6 +25,7 @@ export class ViewProfileComponent {
 
     this.userService.getUserByName(this.Nome)
       .subscribe(usuario => {
+        this.Nome = usuario.nome
         this.Descricao = usuario.descricao
         this.url = "http://localhost:5022/img/" + usuario.imageId
         const Nascimento = new Date(new String(usuario.dataNascimento).toString())

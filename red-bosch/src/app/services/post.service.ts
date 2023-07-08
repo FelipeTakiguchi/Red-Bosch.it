@@ -23,7 +23,9 @@ export class PostService {
         return this.http.get<PostDTO[]>('http://localhost:5022/posts')
     }
 
-    deletePost(id: string) {
-        return this.http.get<boolean>('http://localhost:5022/deletePost/' + id)
+    deletePost(formData: FormData) {
+        return this.http.post<PostDTO>('http://localhost:5022/deletePost/', formData, {
+            observe: 'response',
+        })
     }
 }

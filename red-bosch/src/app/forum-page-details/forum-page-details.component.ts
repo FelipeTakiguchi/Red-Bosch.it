@@ -49,11 +49,10 @@ export class ForumPageDetailsComponent {
             conteudo: post.conteudo,
             dataPublicacao: post.dataPublicacao,
             imageId: post.imageId,
-            idForum: post.idForum,
-            jwt: post.jwt
+            idForum: post.idForum.toString(),
+            jwt: post.jwt,
           })
         });
-
         this.posts = newList
       })
   }

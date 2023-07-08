@@ -33,7 +33,6 @@ public class UserController : ControllerBase
         [FromServices] IImageRepository imgr)
     {
         var files = Request.Form.Files;
-
         if (files.Count > 0)
         {
             var file = Request.Form.Files[0];
@@ -46,7 +45,9 @@ public class UserController : ControllerBase
             await repo.Add(img);
         }
 
-        var query = await userRep.Filter(u => u.Nome == Request.Form["nome"] || u.Email == Request.Form["email"]);
+        string nome = Request.Form["nome"];
+        string email = Request.Form["email"];
+        var query = await userRep.Filter(u => u.Nome == nome || u.Email == email);
 
         if (query.Count > 0)
             return BadRequest();

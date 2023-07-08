@@ -4,7 +4,7 @@
             <button (click)="changeUpvote()">
                 <i id="upvote" [ngStyle]="{'color': Upvoted? 'green' : 'white'}" class="fas fa-arrow-up upvote"></i>
             </button>
-            <p class="votes-count">0</p>
+            <p class="votes-count">{{votesQuantity}}</p>
             <button (click)="changeDownvote()">
                 <i id="downvote" [ngStyle]="{'color': Downvoted? 'red' : 'white'}"
                     class="fas fa-arrow-down downvote"></i>
@@ -16,7 +16,7 @@
                 <app-custom-profile-img [size]="'35px'" [url]="imageUsuario"
                     [Nome]="nomeUsuario"></app-custom-profile-img>
                 <p class="pub">Published by: {{nomeUsuario}}</p>
-                <div class="container-right">
+                <div class="container-right" *ngIf="isDelete">
                     <button class="delete-button"><img src="./assets/images/delete.png" alt="delete button" (click)="deletePost()"></button>
                 </div>
             </div>

@@ -12,7 +12,7 @@
           "Microsoft.EntityFrameworkCore.Design": "7.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.8",
           "Swashbuckle.AspNetCore": "6.4.0",
-          "seguranca-jwt": "0.1.0"
+          "security-jwt": "1.0.0"
         },
         "runtime": {
           "backend.dll": {}
@@ -668,7 +668,7 @@
           }
         }
       },
-      "seguranca-jwt/0.1.0": {
+      "security-jwt/1.0.0": {
         "runtime": {
           "security-jwt.dll": {}
         }
@@ -1192,7 +1192,7 @@
       "path": "system.windows.extensions/5.0.0",
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
     },
-    "seguranca-jwt/0.1.0": {
+    "security-jwt/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
