@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Jwt } from 'src/DTO/Jwt';
 import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
 import { VoteService } from '../services/vote.service';
 import { VoteDTO } from 'src/DTO/voteDTO';
+import { CommentService } from '../services/comment.service';
+import { CommentDTO } from 'src/DTO/CommentDTO';
 
 @Component({
   selector: 'app-forum-card',
@@ -23,6 +25,9 @@ export class ForumCardComponent implements OnInit {
   @Input() idForum: string = "";
   @Input() isDelete: boolean = false;
   @Input() votesQuantity: number = 0;
+  @Input() commentText: string = "";
+  @Input() comments: CommentDTO[] = [];
+  @Output() onPost = new EventEmitter<any>();
 
   formData: FormData = new FormData();
 
@@ -30,7 +35,7 @@ export class ForumCardComponent implements OnInit {
   protected Downvoted = false;
 
   constructor(private userService: UserService, private postService: PostService,
-    private router: Router, private voteService: VoteService) { }
+    private router: Router, private voteService: VoteService, private commentService: CommentService) { }
 
   jwt: Jwt = {
     jwt: '',
@@ -62,6 +67,22 @@ export class ForumCardComponent implements OnInit {
       .subscribe(res => {
         this.getVotes()
       })
+      
+    this.commentService.getComments(this.id)
+      .subscribe(list => {
+        var newList: CommentDTO[] = []
+        list.forEach(comment => {
+          newList.push({
+            id: comment.id,
+            conteudo: comment.conteudo,
+            dataPublicacao: comment.dataPublicacao,
+            idPost: comment.idPost,
+            usuario: comment.usuario
+          })
+        });
+
+        this.comments = newList
+      })
   }
 
   protected changeDownvote() {
@@ -81,6 +102,7 @@ export class ForumCardComponent implements OnInit {
 
     this.Upvoted = false;
     this.Downvoted = true;
+    this.onPost.emit()
   }
 
   protected changeUpvote() {
@@ -100,6 +122,7 @@ export class ForumCardComponent implements OnInit {
 
     this.Downvoted = false;
     this.Upvoted = true;
+    this.onPost.emit()
   }
 
   deletePost() {
@@ -108,7 +131,7 @@ export class ForumCardComponent implements OnInit {
     console.log(this.id.toString())
     this.postService.deletePost(this.formData)
       .subscribe(res => {
-        console.log(res)
+        window.location.reload()
       })
   }
 
@@ -137,6 +160,39 @@ export class ForumCardComponent implements OnInit {
         });
 
         this.votesQuantity = newList.length
+      })
+
+  }
+
+  createComment() {
+    this.formData.delete("idUsuario")
+    this.formData.delete("idPost")
+    this.formData.delete("content")
+    this.formData.delete("date")
+    this.formData.append("idUsuario", sessionStorage.getItem("jwtSession")!)
+    this.formData.append("idPost", this.id.toString())
+    this.formData.append("date", new Date().toLocaleDateString())
+    this.formData.append("conteudo", this.commentText)
+
+    this.commentService.addComment(this.formData)
+      .subscribe(res => {
+        if (res.status == 200) {
+          this.commentService.getComments(this.id)
+            .subscribe(list => {
+              var newList: CommentDTO[] = []
+              list.forEach(comment => {
+                newList.push({
+                  id: comment.id,
+                  conteudo: comment.conteudo,
+                  dataPublicacao: comment.dataPublicacao,
+                  idPost: comment.idPost,
+                  usuario: comment.usuario
+                })
+              });
+
+              this.comments = newList
+            })
+        }
       })
   }
 }

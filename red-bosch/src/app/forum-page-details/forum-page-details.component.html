@@ -20,7 +20,7 @@
             <button class="confirm-button" mat-raised-button color="primary" (click)="CreatePost()">Confirm</button>
         </div>
         <div class="cards" *ngFor="let post of posts">
-            <app-forum-card [id]="post.id" [conteudo]="post.conteudo" [dataPublicacao]="post.dataPublicacao"
+            <app-forum-card (onPost)="onPost()" [id]="post.id" [conteudo]="post.conteudo" [dataPublicacao]="post.dataPublicacao"
             [idUsuario]="post.jwt" [imagemId]="post.imageId" [idForum]="post.idForum" ></app-forum-card>
         </div>
     </div>

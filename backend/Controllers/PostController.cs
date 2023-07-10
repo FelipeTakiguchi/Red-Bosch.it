@@ -42,6 +42,7 @@ public class PostController : ControllerBase
             Conteudo = Request.Form["content"],
             DataPublicacao = DateTime.Parse(Request.Form["date"]),
             IdUsuario = result.UserID,
+            Votes = 0,
             IdForum = Convert.ToInt16(Request.Form["idForum"]),
         };
 
@@ -74,13 +75,14 @@ public class PostController : ControllerBase
                     ImageId = post[i].ImageId,
                     DataPublicacao = post[i].DataPublicacao,
                     IdUsuario = post[i].IdUsuario,
+                    Votes = post[i].Votes,
                     IdForum = post[i].IdForum,
                     jwt = jwtService.GetToken<UserJwt>(new UserJwt { UserID = post[i].IdUsuario }),
                 };
                 postDTOs.Add(postDTO);
             }
 
-            return postDTOs.OrderByDescending(postDTO => postDTO.Id).ToList();
+            return postDTOs.OrderByDescending(postDTO => postDTO.Votes).ToList();
         }
         catch (Exception e)
         {
@@ -91,7 +93,8 @@ public class PostController : ControllerBase
     [HttpPost("/deletePost")]
     public async Task<ActionResult<Post>> DeletePost(
         [FromServices] IPostRepository postRepository,
-        [FromServices] IVoteRepository voteRepository
+        [FromServices] IVoteRepository voteRepository,
+        [FromServices] ICommentRepository commentRepository
     )
     {
         try
@@ -100,13 +103,20 @@ public class PostController : ControllerBase
 
             var post = await postRepository.Filter(p => p.Id == Convert.ToInt16(Request.Form["idPost"]));
             var votes = await voteRepository.Filter(v => v.IdPost == Convert.ToInt16(Request.Form["idPost"]));
+            var comments = await commentRepository.Filter(c => c.IdPost == Convert.ToInt16(Request.Form["idPost"]));
+
+            if (comments.Any())
+                foreach (var comment in comments)
+                {
+                    await commentRepository.Delete(comment);
+                }
 
             if (votes.Any())
                 foreach (var vote in votes)
                 {
                     await voteRepository.Delete(vote);
                 }
-                
+
             if (post.Any())
                 await postRepository.Delete(post[0]);
             else
@@ -139,6 +149,7 @@ public class PostController : ControllerBase
                     Conteudo = post[i].Conteudo,
                     ImageId = post[i].ImageId,
                     DataPublicacao = post[i].DataPublicacao,
+                    Votes = post[i].Votes,
                     IdUsuario = post[i].IdUsuario,
                     jwt = jwtService.GetToken<UserJwt>(new UserJwt { UserID = post[i].IdUsuario }),
                 };
@@ -146,7 +157,7 @@ public class PostController : ControllerBase
                 postDTOs.Add(postDTO);
             }
 
-            return postDTOs.OrderByDescending(postDTO => postDTO.Id).ToList();
+            return postDTOs.OrderByDescending(postDTO => postDTO.Votes).ToList();
         }
         catch (Exception e)
         {

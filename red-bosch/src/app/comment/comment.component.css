@@ -1,0 +1,22 @@
+.card-comment{
+    width: 500px;
+    background-color: var(--gray-300);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.user-info{
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+    align-items: center;
+    width: 400px !important;
+}
+
+.content{
+    background-color: var(--gray);
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 12px;
+}

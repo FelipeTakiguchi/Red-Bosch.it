@@ -15,6 +15,8 @@ public partial class Post
 
     public int IdUsuario { get; set; }
 
+    public int Votes { get; set; }
+
     public int IdForum { get; set; }
 
     public virtual ICollection<Comentario> Comentarios { get; set; } = new List<Comentario>();
@@ -25,5 +27,5 @@ public partial class Post
 
     public virtual ImageDatum Image { get; set; }
 
-    public virtual ICollection<Vote> Votes { get; set; } = new List<Vote>();
+    public virtual ICollection<Vote> VotesNavigation { get; set; } = new List<Vote>();
 }

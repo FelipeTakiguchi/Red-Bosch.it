@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Jwt } from 'src/DTO/Jwt';
 import { PostDTO } from 'src/DTO/PostDTO';
@@ -18,6 +18,7 @@ export class FeedPageComponent implements OnInit {
   @Input() Imagem: File | undefined;
   @Input() url: string | undefined;
   @Input() isLogged: boolean = false;
+
   posts: PostDTO[] = []
 
   text = "Altere aqui..."
@@ -27,6 +28,10 @@ export class FeedPageComponent implements OnInit {
 
   jwt: Jwt = {
     jwt: '',
+  }
+
+  onPost() {
+    window.location.reload()
   }
 
   ngOnInit(): void {

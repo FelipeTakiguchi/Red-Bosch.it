@@ -17,13 +17,27 @@
                     [Nome]="nomeUsuario"></app-custom-profile-img>
                 <p class="pub">Published by: {{nomeUsuario}}</p>
                 <div class="container-right" *ngIf="isDelete">
-                    <button class="delete-button"><img src="./assets/images/delete.png" alt="delete button" (click)="deletePost()"></button>
+                    <button class="delete-button"><img src="./assets/images/delete.png" alt="delete button"
+                            (click)="deletePost()"></button>
                 </div>
             </div>
             <br>
             <p class="post-content">{{conteudo}}</p>
             <img class="post-image" *ngIf="imagemId != null" src="http://localhost:5022/img/{{imagemId}}"
                 alt="Imagem do post">
+        </div>
+    </div>
+    <div class="comments-box">
+        <div class="new-comment">
+            <mat-form-field>
+                <mat-label>New comment</mat-label>
+                <textarea matInput [(ngModel)]="commentText" placeholder="This fórum is..."></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="createComment()">Confirm</button>
+        </div>
+
+        <div class="comments" *ngFor="let comment of comments">
+            <app-comment [dataPublicacao]="comment.dataPublicacao" [usuario]="comment.usuario" [content]="comment.conteudo"></app-comment>
         </div>
     </div>
 </div>

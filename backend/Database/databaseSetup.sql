@@ -77,6 +77,7 @@ create table Post(
 	Conteudo varchar(255) not null,                                        
 	DataPublicacao date not null,
 	IdUsuario int not null,
+	Votes int not null,
 	foreign key(IdUsuario) references Usuario(Id),
 	IdForum int not null,
 	foreign key(IdForum) references Forum(Id),

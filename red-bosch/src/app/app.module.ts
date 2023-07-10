@@ -32,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ForumPageDetailsComponent } from './forum-page-details/forum-page-details.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
     UploaderComponent,
     ForumPageDetailsComponent,
     ViewProfileComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

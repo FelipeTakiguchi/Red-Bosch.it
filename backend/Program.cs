@@ -36,6 +36,7 @@ builder.Services.AddTransient<IPostRepository, PostRepository>();
 builder.Services.AddTransient<IUsuarioCargoRepository, UsuarioCargoRepository>();
 builder.Services.AddTransient<IUsuarioForumRepository, UsuarioForumRepository>();
 builder.Services.AddTransient<IVoteRepository, VoteRepository>();
+builder.Services.AddTransient<ICommentRepository, CommentRepository>();
 
 builder.Services.AddTransient<IPasswordProvider>(p =>{
     return new PasswordProvider("minhasenhaultrasecreta");

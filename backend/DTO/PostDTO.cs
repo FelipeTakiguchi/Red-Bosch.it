@@ -7,6 +7,7 @@ public partial class PostDTO
     public int? ImageId { get; set; }
 
     public string Conteudo { get; set; }
+    public int Votes { get; set; }
 
     public DateTime DataPublicacao { get; set; }
 

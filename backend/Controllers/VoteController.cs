@@ -17,6 +17,7 @@ public class VoteController : ControllerBase
         [FromServices] IVoteRepository voteRepository,
         [FromServices] IRepository<ImageDatum> repo,
         [FromServices] IImageRepository imgr,
+        [FromServices] IPostRepository postRepository,
         [FromServices] IJwtService jwtService)
     {
         var result = jwtService.Validate<UserJwt>(Request.Form["idUsuario"]);
@@ -24,15 +25,29 @@ public class VoteController : ControllerBase
         var post = await voteRepository.Filter(p => p.IdPost == Convert.ToInt16(Request.Form["idPost"])
             && p.IdUsuario == result.UserID);
 
+        var update = await postRepository.Filter(p => p.Id == Convert.ToInt16(Request.Form["idPost"]));
+
         if (post.Count > 0)
         {
             if (Request.Form["state"] == "true")
             {
+                if (!post[0].State)
+                {
+                    update[0].Votes += 1;
+                    await postRepository.Update(update[0]);
+                }
+
                 post[0].State = true;
                 await voteRepository.Update(post[0]);
             }
             else
             {
+                if (post[0].State)
+                {
+                    update[0].Votes -= 1;
+                    await postRepository.Update(update[0]);
+                }
+
                 post[0].State = false;
                 await voteRepository.Update(post[0]);
             }
@@ -45,6 +60,12 @@ public class VoteController : ControllerBase
                 IdUsuario = result.UserID,
                 IdPost = Convert.ToInt16(Request.Form["idPost"]),
             };
+
+            if (Request.Form["state"] == "true")
+            {
+                update[0].Votes = 1;
+                await postRepository.Update(update[0]);
+            }
 
             await voteRepository.Add(vote);
         }
@@ -64,7 +85,7 @@ public class VoteController : ControllerBase
             var upVotes = await voteRepository.Filter(p => p.IdPost == Convert.ToInt16(code));
             List<VoteDTO> voteDTOs = new List<VoteDTO>();
 
-            foreach(var vote in upVotes)
+            foreach (var vote in upVotes)
             {
                 VoteDTO voteDTO = new VoteDTO
                 {
@@ -87,4 +108,5 @@ public class VoteController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
 }

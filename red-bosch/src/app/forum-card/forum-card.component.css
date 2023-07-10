@@ -81,3 +81,29 @@ button:hover {
 .delete-button img{
     width: 30px;
 }
+
+.comments-box{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--gray-100);
+    padding: 7px;
+    padding-top: 15px;
+    border-radius: 12px;
+}
+
+.new-comment button{
+    border-radius: 0%;
+    margin-left: 10px;
+    height: 75px;
+    width: 110px;
+    margin-top: -20px;
+    font-size: 20px;
+    border-radius: 12px;
+}
+
+mat-form-field {
+    width: 400px !important;
+
+}

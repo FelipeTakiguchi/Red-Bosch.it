@@ -20,6 +20,10 @@ export class ForumPageDetailsComponent {
   formData = new FormData();
   id: string = '';
 
+  onPost() {
+    window.location.reload()
+  }
+
   protected onHandleUpload(event: any) {
     this.formData = event
   }
