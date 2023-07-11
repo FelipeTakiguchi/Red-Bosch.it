@@ -61,21 +61,7 @@ export class FeedPageComponent implements OnInit {
           }
         })
 
-    this.postService.getAll()
-      .subscribe(list => {
-        var newList: PostDTO[] = []
-        list.forEach(post => {
-          newList.push({
-            id: post.id,
-            conteudo: post.conteudo,
-            dataPublicacao: post.dataPublicacao,
-            imageId: post.imageId,
-            idForum: post.idForum,
-            jwt: post.jwt,
-          })
-        });
-        this.posts = newList
-      })
+    this.refreshPosts();
   }
 
   onClick() {
@@ -83,5 +69,45 @@ export class FeedPageComponent implements OnInit {
   }
   update(event: any) {
     this.text = event.target.value
+  }
+
+  refreshPosts() {
+    this.forumService.getAllUsersForum()
+      .subscribe(ufs => {
+        var newList: UserForumDTO[] = []
+        ufs.forEach(uf => {
+          newList.push({
+            id: uf.id,
+            idForum: uf.idForum,
+            usuario: uf.usuario,
+          })
+        })
+
+        this.usersForums = newList
+      });
+
+      this.postService.getAll()
+      .subscribe(list => {
+        var newList: PostDTO[] = []
+        list.forEach(post => {
+          var flag = false
+          console.log(post)
+          this.usersForums.forEach(uf => {
+            if(uf.idForum == post.idForum && uf.usuario == sessionStorage.getItem("jwtSession"))
+              flag = true
+          })
+          
+          newList.push({
+            id: post.id,
+            conteudo: post.conteudo,
+            dataPublicacao: post.dataPublicacao,
+            imageId: post.imageId,
+            idForum: post.idForum,
+            jwt: post.jwt,
+            participate: flag
+          })
+        });
+        this.posts = newList
+      })
   }
 }

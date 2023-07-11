@@ -25,6 +25,7 @@
     padding: 15px;
     font-size: 18px;
     border-radius: 12px;
+    word-wrap: break-word;
 }
 
 .delete-button {

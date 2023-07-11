@@ -3,7 +3,7 @@ export interface PostDTO {
     imageId: number;
     conteudo: string;
     dataPublicacao: Date;
-    idForum: string,
+    idForum: number,
     jwt: string,
     participate?: boolean;
 }

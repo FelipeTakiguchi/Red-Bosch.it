@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Jwt } from 'src/DTO/Jwt';
 import { UserService } from '../services/user.service';
 import { CommentService } from '../services/comment.service';
@@ -17,6 +17,7 @@ export class CommentComponent implements OnInit {
   @Input() usuario: string = '';
   @Input() isLogged: boolean = false;
   @Input() isDelete: boolean = false;
+  @Output() commentDeleted = new EventEmitter<string>();
 
   formData: FormData = new FormData();
 
@@ -56,7 +57,7 @@ export class CommentComponent implements OnInit {
     this.commentService.deleteComment(this.formData)
       .subscribe(res => {
         if (res.status == 200) {
-          window.location.reload()
+          this.commentDeleted.emit()
         }
       })
   }

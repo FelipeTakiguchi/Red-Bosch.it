@@ -22,13 +22,15 @@ export class ForumCardComponent implements OnInit {
   @Input() nomeUsuario: string = '';
   @Input() imagemId: number = 0;
   @Input() isLogged: boolean = false;
-  @Input() idForum: string = "";
+  @Input() idForum: number = 0;
   @Input() isDelete: boolean = false;
   @Input() votesQuantity: number = 0;
   @Input() commentText: string = "";
   @Input() comments: CommentDTO[] = [];
   @Input() participate: boolean = false;
   @Output() onPost = new EventEmitter<any>();
+  @Output() onDeletePost = new EventEmitter<any>();
+  @Output() commentDeleted = new EventEmitter<string>();
 
   formData: FormData = new FormData();
 
@@ -97,13 +99,13 @@ export class ForumCardComponent implements OnInit {
     this.voteService.addVote(this.formData)
       .subscribe(res => {
         if (res.status == 200) {
+          this.onPost.emit()
           this.getVotes()
         }
       })
 
     this.Upvoted = false;
     this.Downvoted = true;
-    this.onPost.emit()
   }
 
   protected changeUpvote() {
@@ -117,20 +119,20 @@ export class ForumCardComponent implements OnInit {
     this.voteService.addVote(this.formData)
       .subscribe(res => {
         if (res.status == 200) {
+          this.onPost.emit()
           this.getVotes()
         }
       })
 
     this.Downvoted = false;
     this.Upvoted = true;
-    this.onPost.emit()
   }
 
   deletePost() {
     this.formData.set("idPost", this.id.toString())
     this.postService.deletePost(this.formData)
       .subscribe(res => {
-        window.location.reload()
+        this.onDeletePost.emit()
       })
   }
 
@@ -166,7 +168,7 @@ export class ForumCardComponent implements OnInit {
   createComment() {
     this.formData.delete("idUsuario")
     this.formData.delete("idPost")
-    this.formData.delete("content")
+    this.formData.delete("conteudo")
     this.formData.delete("date")
     this.formData.append("idUsuario", sessionStorage.getItem("jwtSession")!)
     this.formData.append("idPost", this.id.toString())
@@ -176,7 +178,14 @@ export class ForumCardComponent implements OnInit {
     this.commentService.addComment(this.formData)
       .subscribe(res => {
         if (res.status == 200) {
-          this.commentService.getComments(this.id.toString())
+            this.refreshComments();
+            this.commentText = '';
+        }
+      })
+  }
+
+  refreshComments() {
+    this.commentService.getComments(this.id.toString())
             .subscribe(list => {
               var newList: CommentDTO[] = []
               list.forEach(comment => {
@@ -191,7 +200,5 @@ export class ForumCardComponent implements OnInit {
 
               this.comments = newList
             })
-        }
-      })
   }
 }

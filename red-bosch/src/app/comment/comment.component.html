@@ -2,7 +2,7 @@
     <div class="user-info">
         <div class="box-user">
             <app-custom-profile-img [size]="'35px'" [url]="imageUsuario" [Nome]="nomeUsuario"></app-custom-profile-img>
-            <p class="pub">Published by: {{nomeUsuario}} ({{dataPublicacao}})</p>
+            <p class="pub">Published by: {{nomeUsuario}} ({{dataPublicacao.toString().split('T')[0]}})</p>
         </div>
         <button *ngIf="isDelete" class="delete-button"><img src="./assets/images/delete.png" alt="delete button"
                 (click)="deleteComment()"></button>

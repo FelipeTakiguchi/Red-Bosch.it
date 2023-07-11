@@ -28,7 +28,7 @@
         <div class="cards" *ngFor="let post of posts">
             <app-forum-card (onPost)="onPost()" [id]="post.id" [conteudo]="post.conteudo"
                 [dataPublicacao]="post.dataPublicacao" [idUsuario]="post.jwt" [imagemId]="post.imageId"
-                [idForum]="post.idForum" [participate]="participate"></app-forum-card>
+                [idForum]="post.idForum" [participate]="participate" (onDeletePost)="refreshPosts()"></app-forum-card>
         </div>
     </div>
 </div>

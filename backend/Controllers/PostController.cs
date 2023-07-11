@@ -149,6 +149,7 @@ public class PostController : ControllerBase
                     DataPublicacao = post[i].DataPublicacao,
                     Votes = post[i].Votes,
                     IdUsuario = post[i].IdUsuario,
+                    IdForum = post[i].IdForum,
                     jwt = jwtService.GetToken<UserJwt>(new UserJwt { UserID = post[i].IdUsuario }),
                 };
 

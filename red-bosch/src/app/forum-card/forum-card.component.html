@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="comments-box">
-        <div class="new-comment" *ngIf="isLogged">
+        <div class="new-comment" *ngIf="isLogged && participate">
             <mat-form-field>
                 <mat-label>New comment</mat-label>
                 <textarea matInput [(ngModel)]="commentText" placeholder="This fórum is..."></textarea>
@@ -40,7 +40,7 @@
 
         <div class="comments" *ngFor="let comment of comments">
             <app-comment [id]="comment.id" [dataPublicacao]="comment.dataPublicacao" [usuario]="comment.usuario"
-                [content]="comment.conteudo"></app-comment>
+                [content]="comment.conteudo" (commentDeleted)="refreshComments()"></app-comment>
         </div>
     </div>
 </div>

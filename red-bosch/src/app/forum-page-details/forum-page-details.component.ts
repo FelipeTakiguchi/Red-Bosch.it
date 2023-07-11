@@ -26,7 +26,7 @@ export class ForumPageDetailsComponent {
   id: string = '';
 
   onPost() {
-    window.location.reload()
+    this.refreshPosts()
   }
 
   protected onHandleUpload(event: any) {
@@ -53,21 +53,7 @@ export class ForumPageDetailsComponent {
           this.isDelete = true
       });
 
-    this.postService.getPosts(this.id)
-      .subscribe(list => {
-        var newList: PostDTO[] = []
-        list.forEach(post => {
-          newList.push({
-            id: post.id,
-            conteudo: post.conteudo,
-            dataPublicacao: post.dataPublicacao,
-            imageId: post.imageId,
-            idForum: post.idForum.toString(),
-            jwt: post.jwt,
-          })
-        });
-        this.posts = newList
-      })
+    this.refreshPosts()
 
     this.forumService.getUsersForum(this.id)
       .subscribe(list => {
@@ -117,6 +103,24 @@ export class ForumPageDetailsComponent {
         if (body == 200) {
           this.router.navigate(["/forumPage"])
         }
+      })
+  }
+
+  refreshPosts() {
+    this.postService.getPosts(this.id)
+      .subscribe(list => {
+        var newList: PostDTO[] = []
+        list.forEach(post => {
+          newList.push({
+            id: post.id,
+            conteudo: post.conteudo,
+            dataPublicacao: post.dataPublicacao,
+            imageId: post.imageId,
+            idForum: post.idForum,
+            jwt: post.jwt,
+          })
+        });
+        this.posts = newList
       })
   }
 }
