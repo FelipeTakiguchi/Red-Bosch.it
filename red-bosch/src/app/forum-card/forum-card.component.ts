@@ -27,6 +27,7 @@ export class ForumCardComponent implements OnInit {
   @Input() votesQuantity: number = 0;
   @Input() commentText: string = "";
   @Input() comments: CommentDTO[] = [];
+  @Input() participate: boolean = false;
   @Output() onPost = new EventEmitter<any>();
 
   formData: FormData = new FormData();
@@ -68,7 +69,7 @@ export class ForumCardComponent implements OnInit {
         this.getVotes()
       })
       
-    this.commentService.getComments(this.id)
+    this.commentService.getComments(this.id.toString())
       .subscribe(list => {
         var newList: CommentDTO[] = []
         list.forEach(comment => {
@@ -127,8 +128,6 @@ export class ForumCardComponent implements OnInit {
 
   deletePost() {
     this.formData.set("idPost", this.id.toString())
-    console.log("=============")
-    console.log(this.id.toString())
     this.postService.deletePost(this.formData)
       .subscribe(res => {
         window.location.reload()
@@ -177,7 +176,7 @@ export class ForumCardComponent implements OnInit {
     this.commentService.addComment(this.formData)
       .subscribe(res => {
         if (res.status == 200) {
-          this.commentService.getComments(this.id)
+          this.commentService.getComments(this.id.toString())
             .subscribe(list => {
               var newList: CommentDTO[] = []
               list.forEach(comment => {

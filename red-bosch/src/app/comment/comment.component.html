@@ -1,8 +1,11 @@
 <div class="card-comment">
     <div class="user-info">
-        <app-custom-profile-img [size]="'35px'" [url]="imageUsuario"
-                    [Nome]="nomeUsuario"></app-custom-profile-img>
-        <p class="pub">Published by: {{nomeUsuario}} ({{dataPublicacao}})</p>
+        <div class="box-user">
+            <app-custom-profile-img [size]="'35px'" [url]="imageUsuario" [Nome]="nomeUsuario"></app-custom-profile-img>
+            <p class="pub">Published by: {{nomeUsuario}} ({{dataPublicacao}})</p>
+        </div>
+        <button *ngIf="isDelete" class="delete-button"><img src="./assets/images/delete.png" alt="delete button"
+                (click)="deleteComment()"></button>
     </div>
     <div class="content">
         {{content}}

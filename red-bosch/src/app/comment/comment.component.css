@@ -1,5 +1,5 @@
 .card-comment{
-    width: 500px;
+    width: 700px;
     background-color: var(--gray-300);
     margin: 10px;
     padding: 10px;
@@ -8,10 +8,16 @@
 
 .user-info{
     display: flex;
-    gap: 10px;
     font-size: 15px;
     align-items: center;
-    width: 400px !important;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.box-user{
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .content{
@@ -19,4 +25,20 @@
     padding: 15px;
     font-size: 18px;
     border-radius: 12px;
+}
+
+.delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    border: none;
+    box-shadow: gray 1px 1px 1px 1px;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+}
+
+.delete-button img{
+    width: 30px;
 }

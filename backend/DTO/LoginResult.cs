@@ -1,4 +1,4 @@
-public class LoginResult
+public class LoginResultDTO
 {
     public bool UserExists { get; set; } = false;
     public bool Success { get; set; } = false;

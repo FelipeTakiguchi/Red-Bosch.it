@@ -5,4 +5,5 @@ export interface PostDTO {
     dataPublicacao: Date;
     idForum: string,
     jwt: string,
+    participate?: boolean;
 }

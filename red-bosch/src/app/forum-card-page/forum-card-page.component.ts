@@ -39,4 +39,17 @@ export class ForumCardPageComponent {
   enterForum() {
     this.router.navigate(["/forumPage/" + this.id.toString()])
   }
+
+  exitForum() {
+    this.formData.delete('idUsuario')
+    this.formData.delete('idForum')
+    this.formData.append('idUsuario', sessionStorage.getItem("jwtSession") ?? '')
+    this.formData.append('idForum', this.id.toString())
+
+    this.forumService.exitForum(this.formData)
+      .subscribe(res => {
+        if(res.status == 200)
+          window.location.reload()
+      })
+  }
 }

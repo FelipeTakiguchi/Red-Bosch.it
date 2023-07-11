@@ -101,7 +101,7 @@ public class UserController : ControllerBase
         [FromServices] IJwtService jwtService
     )
     {
-        var result = new LoginResult();
+        var result = new LoginResultDTO();
         var emailList = await userRep.Filter(u => u.Email == loginData.Email);
         var nameList = await userRep.Filter(u => u.Nome == loginData.Email);
 
@@ -165,7 +165,6 @@ public class UserController : ControllerBase
     {
         try
         {
-            Console.WriteLine(nome);
             var query = await userRepository.Filter(u => u.Nome == nome);
 
             Usuario u = new Usuario()

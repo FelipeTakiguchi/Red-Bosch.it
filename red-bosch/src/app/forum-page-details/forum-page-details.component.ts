@@ -4,6 +4,8 @@ import { PostDTO } from 'src/DTO/PostDTO';
 import { Router } from '@angular/router';
 import { PostService } from '../services/post.service';
 import { ForumService } from '../services/forum.services';
+import { UserForumDTO } from 'src/DTO/UserForumDTO';
+import { ForumOwnerDTO } from 'src/DTO/ForumOwnerDTO';
 
 @Component({
   selector: 'app-forum-page-details',
@@ -11,12 +13,15 @@ import { ForumService } from '../services/forum.services';
   styleUrls: ['./forum-page-details.component.css']
 })
 export class ForumPageDetailsComponent {
-  posts: PostDTO[] = []
-  forum: ForumDTO = { id: 0, titulo: '', descricao: '', IdUsuario: 0, imageId: '', inscritos: 0 };
+  posts: PostDTO[] = [];
+  usersForum: UserForumDTO[] = [];
+  forum: ForumOwnerDTO = { id: 0, titulo: '', descricao: '', usuario: '', imageId: '', inscritos: 0 };
   @Input() Nome: string | undefined;
   @Input() url: string | undefined;
   @Input() Content: string = '';
   @Input() ContentPost: string = '';
+  @Input() participate: boolean = false;
+  @Input() isDelete: boolean = false;
   formData = new FormData();
   id: string = '';
 
@@ -32,18 +37,22 @@ export class ForumPageDetailsComponent {
 
   ngOnInit(): void {
     this.id = location.pathname.split("/")[2];
-    
+
     this.forumService.getForum(this.id)
       .subscribe(forum => {
         this.forum = {
           id: forum.id,
           titulo: forum.titulo,
           descricao: forum.descricao,
-          IdUsuario: forum.IdUsuario,
+          usuario: forum.usuario,
           inscritos: forum.inscritos,
           imageId: "http://localhost:5022/img/" + forum.imageId,
         };
+
+        if (this.forum.usuario == sessionStorage.getItem("jwtSession"))
+          this.isDelete = true
       });
+
     this.postService.getPosts(this.id)
       .subscribe(list => {
         var newList: PostDTO[] = []
@@ -58,6 +67,21 @@ export class ForumPageDetailsComponent {
           })
         });
         this.posts = newList
+      })
+
+    this.forumService.getUsersForum(this.id)
+      .subscribe(list => {
+        var newList: UserForumDTO[] = []
+        list.forEach(uf => {
+          newList.push({
+            id: uf.id,
+            usuario: uf.usuario,
+            idForum: uf.idForum,
+          })
+          if (uf.usuario == sessionStorage.getItem("jwtSession"))
+            this.participate = true;
+        });
+        this.usersForum = newList
       })
   }
 
@@ -81,5 +105,18 @@ export class ForumPageDetailsComponent {
         })
     } else
       window.alert("Preencha todos os campos!")
+  }
+
+  DeleteForum() {
+    this.formData.delete('idForum')
+    this.formData.append('idForum', this.id)
+
+    this.forumService.deleteForum(this.formData)
+      .subscribe(res => {
+        var body: any = res.status
+        if (body == 200) {
+          this.router.navigate(["/forumPage"])
+        }
+      })
   }
 }

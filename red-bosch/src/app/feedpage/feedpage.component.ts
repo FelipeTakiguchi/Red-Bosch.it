@@ -3,6 +3,8 @@ import { UserService } from '../services/user.service';
 import { Jwt } from 'src/DTO/Jwt';
 import { PostDTO } from 'src/DTO/PostDTO';
 import { PostService } from '../services/post.service';
+import { ForumService } from '../services/forum.services';
+import { UserForumDTO } from 'src/DTO/UserForumDTO';
 
 @Component({
   selector: 'app-forum',
@@ -18,13 +20,15 @@ export class FeedPageComponent implements OnInit {
   @Input() Imagem: File | undefined;
   @Input() url: string | undefined;
   @Input() isLogged: boolean = false;
+  @Input() participate: boolean = false;
+  usersForums: UserForumDTO[] = []
 
   posts: PostDTO[] = []
 
   text = "Altere aqui..."
   savedText = ""
 
-  constructor(private userService: UserService, private postService: PostService) { }
+  constructor(private userService: UserService, private postService: PostService, private forumService: ForumService) { }
 
   jwt: Jwt = {
     jwt: '',
@@ -67,10 +71,9 @@ export class FeedPageComponent implements OnInit {
             dataPublicacao: post.dataPublicacao,
             imageId: post.imageId,
             idForum: post.idForum,
-            jwt: post.jwt
+            jwt: post.jwt,
           })
         });
-
         this.posts = newList
       })
   }

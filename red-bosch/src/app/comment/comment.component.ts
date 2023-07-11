@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Jwt } from 'src/DTO/Jwt';
 import { UserService } from '../services/user.service';
+import { CommentService } from '../services/comment.service';
 
 @Component({
   selector: 'app-comment',
@@ -8,6 +9,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
+  @Input() id: number = 0;
   @Input() content: string = "";
   @Input() dataPublicacao: Date = new Date();
   @Input() imageUsuario: string = '';
@@ -16,13 +18,14 @@ export class CommentComponent implements OnInit {
   @Input() isLogged: boolean = false;
   @Input() isDelete: boolean = false;
 
+  formData: FormData = new FormData();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private commentService: CommentService) { }
 
   jwt: Jwt = {
     jwt: '',
   }
-  
+
   ngOnInit(): void {
     if (sessionStorage.getItem("jwtSession") != null) {
       this.jwt.jwt = sessionStorage.getItem("jwtSession")!
@@ -42,6 +45,18 @@ export class CommentComponent implements OnInit {
             this.nomeUsuario = res.body.nome;
           if (res.body?.imageId.toString() != undefined)
             this.imageUsuario = "http://localhost:5022/img/" + (res.body?.imageId.toString())
+        }
+      })
+  }
+
+  deleteComment() {
+    this.formData.delete("id")
+    this.formData.append("id", this.id.toString())
+
+    this.commentService.deleteComment(this.formData)
+      .subscribe(res => {
+        if (res.status == 200) {
+          window.location.reload()
         }
       })
   }

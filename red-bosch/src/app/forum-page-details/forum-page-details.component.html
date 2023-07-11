@@ -4,24 +4,31 @@
             <img src="{{forum.imageId}}" alt="">
         </div>
         <div class="description">
-            <h1>{{forum.titulo}}</h1>
-            <h2>{{forum.descricao}}</h2>
+            <div class="info-box">
+                <h1>{{forum.titulo}}</h1>
+                <h2>{{forum.descricao}}</h2>
+            </div>
+            <button class="delete-button" *ngIf="isDelete"><img src="./assets/images/delete.png" alt="delete button"
+                    (click)="DeleteForum()"></button>
         </div>
     </div>
     <div class="forum-body">
-        <div class="new-post">
+        <div class="new-post" *ngIf="participate">
             <div class="content">
-                <app-uploader (onUploadFinished)="onHandleUpload($event)" class="uploader" [size]="'130px'"></app-uploader>
+                <app-uploader (onUploadFinished)="onHandleUpload($event)" class="uploader"
+                    [size]="'130px'"></app-uploader>
                 <mat-form-field class="text-area">
                     <mat-label>Content</mat-label>
-                    <textarea [(ngModel)]="ContentPost" matInput placeholder="I'm feeling..." value={{Content}}></textarea>
+                    <textarea [(ngModel)]="ContentPost" matInput placeholder="I'm feeling..."
+                        value={{Content}}></textarea>
                 </mat-form-field>
             </div>
             <button class="confirm-button" mat-raised-button color="primary" (click)="CreatePost()">Confirm</button>
         </div>
         <div class="cards" *ngFor="let post of posts">
-            <app-forum-card (onPost)="onPost()" [id]="post.id" [conteudo]="post.conteudo" [dataPublicacao]="post.dataPublicacao"
-            [idUsuario]="post.jwt" [imagemId]="post.imageId" [idForum]="post.idForum" ></app-forum-card>
+            <app-forum-card (onPost)="onPost()" [id]="post.id" [conteudo]="post.conteudo"
+                [dataPublicacao]="post.dataPublicacao" [idUsuario]="post.jwt" [imagemId]="post.imageId"
+                [idForum]="post.idForum" [participate]="participate"></app-forum-card>
         </div>
     </div>
 </div>

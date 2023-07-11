@@ -13,13 +13,19 @@ export class CommentService {
         return this.http.get<CommentDTO[]>('http://localhost:5022/comments')
     }
 
+    getComments(id: string) {
+        return this.http.get<CommentDTO[]>('http://localhost:5022/comments/' + id)
+    }
+
     addComment(formData: FormData) {
         return this.http.post(' http://localhost:5022/addComment', formData, {
             observe: 'response',
         });
     }
 
-    getComments(id: number) {
-        return this.http.get<CommentDTO[]>('http://localhost:5022/comments/' + id)
+    deleteComment(formData: FormData) {
+        return this.http.post(' http://localhost:5022/deleteComment', formData, {
+            observe: 'response',
+        });
     }
 }

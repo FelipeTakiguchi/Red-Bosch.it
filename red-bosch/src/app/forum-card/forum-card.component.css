@@ -26,6 +26,7 @@
     display: flex;
     flex-direction: column;
     margin: 7px 20px;
+    width: 200% !important;
 }
 
 button {
@@ -55,6 +56,12 @@ button:hover {
 .pub{
     font-size: 17px;
     min-width: 350px;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .post-image{
@@ -104,6 +111,5 @@ button:hover {
 }
 
 mat-form-field {
-    width: 400px !important;
-
+    width: 650px !important;
 }

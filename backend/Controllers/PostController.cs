@@ -81,7 +81,7 @@ public class PostController : ControllerBase
                 };
                 postDTOs.Add(postDTO);
             }
-
+            postDTOs = postDTOs.OrderByDescending(postDTO => postDTO.Id).ToList();
             return postDTOs.OrderByDescending(postDTO => postDTO.Votes).ToList();
         }
         catch (Exception e)
@@ -99,8 +99,6 @@ public class PostController : ControllerBase
     {
         try
         {
-            Console.WriteLine(Request.Form["idPost"]);
-
             var post = await postRepository.Filter(p => p.Id == Convert.ToInt16(Request.Form["idPost"]));
             var votes = await voteRepository.Filter(v => v.IdPost == Convert.ToInt16(Request.Form["idPost"]));
             var comments = await commentRepository.Filter(c => c.IdPost == Convert.ToInt16(Request.Form["idPost"]));
@@ -157,6 +155,7 @@ public class PostController : ControllerBase
                 postDTOs.Add(postDTO);
             }
 
+            postDTOs = postDTOs.OrderByDescending(postDTO => postDTO.Id).ToList();
             return postDTOs.OrderByDescending(postDTO => postDTO.Votes).ToList();
         }
         catch (Exception e)

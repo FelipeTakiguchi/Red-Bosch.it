@@ -1,6 +1,6 @@
 <div class="forum-card">
     <div class="content">
-        <div class="vote" *ngIf="isLogged">
+        <div class="vote" *ngIf="isLogged && participate">
             <button (click)="changeUpvote()">
                 <i id="upvote" [ngStyle]="{'color': Upvoted? 'green' : 'white'}" class="fas fa-arrow-up upvote"></i>
             </button>
@@ -23,12 +23,14 @@
             </div>
             <br>
             <p class="post-content">{{conteudo}}</p>
-            <img class="post-image" *ngIf="imagemId != null" src="http://localhost:5022/img/{{imagemId}}"
-                alt="Imagem do post">
+            <div class="center">
+                <img class="post-image" *ngIf="imagemId != null" src="http://localhost:5022/img/{{imagemId}}"
+                    alt="Imagem do post">
+            </div>
         </div>
     </div>
     <div class="comments-box">
-        <div class="new-comment">
+        <div class="new-comment" *ngIf="isLogged">
             <mat-form-field>
                 <mat-label>New comment</mat-label>
                 <textarea matInput [(ngModel)]="commentText" placeholder="This fórum is..."></textarea>
@@ -37,7 +39,8 @@
         </div>
 
         <div class="comments" *ngFor="let comment of comments">
-            <app-comment [dataPublicacao]="comment.dataPublicacao" [usuario]="comment.usuario" [content]="comment.conteudo"></app-comment>
+            <app-comment [id]="comment.id" [dataPublicacao]="comment.dataPublicacao" [usuario]="comment.usuario"
+                [content]="comment.conteudo"></app-comment>
         </div>
     </div>
 </div>

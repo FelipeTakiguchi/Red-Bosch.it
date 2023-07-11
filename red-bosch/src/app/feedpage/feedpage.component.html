@@ -3,7 +3,7 @@
   <div class="cards">
     <div class="cards" *ngFor="let post of posts">
         <app-forum-card (onPost)="onPost()" [id]="post.id" [conteudo]="post.conteudo" [dataPublicacao]="post.dataPublicacao"
-        [idUsuario]="post.jwt" [imagemId]="post.imageId" ></app-forum-card>
+        [idUsuario]="post.jwt" [imagemId]="post.imageId"></app-forum-card>
     </div>
   </div>
 </div>

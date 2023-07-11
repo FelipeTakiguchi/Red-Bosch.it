@@ -48,11 +48,11 @@ public class CommentController : ControllerBase
     public async Task<ActionResult<List<CommentDTO>>> GetComments(
         [FromServices] ICommentRepository commentRepository,
         [FromServices] IJwtService jwtService,
-        int code)
+        string code)
     {
         try
         {
-            var query = await commentRepository.Filter(c => c.IdPost == code);
+            var query = await commentRepository.Filter(c => c.IdPost == Convert.ToInt16(code));
 
             List<CommentDTO> commentsDTO = new List<CommentDTO>();
 
@@ -60,6 +60,7 @@ public class CommentController : ControllerBase
             {
                 CommentDTO commentDTO = new CommentDTO
                 {
+                    Id = comment.Id,
                     Conteudo = comment.Conteudo,
                     DataPublicacao = comment.DataPublicacao,
                     IdPost = comment.IdPost,
@@ -78,4 +79,28 @@ public class CommentController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpPost("/deleteComment")]
+    public async Task<ActionResult<Comentario>> DeleteComment(
+        [FromServices] ICommentRepository commentRepository
+    )
+    {
+        try
+        {
+            var comment = await commentRepository.Filter(c => c.Id == Convert.ToInt16(Request.Form["id"]));
+
+            if (comment.Any())
+            {
+                await commentRepository.Delete(comment[0]);
+                return comment[0];
+            }
+
+            return NotFound();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
 }
